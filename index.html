@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CultivaTech — L'Agriculture Numérique du Burkina Faso</title>
+  <meta name="description" content="CultivaTech : 15 modules intégrés, 100% fonctionnel hors ligne. La plateforme agro-numérique dédiée aux agriculteurs du Burkina Faso." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=IBM+Plex+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ── RESET & VARIABLES ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --dk:   #0C1F0E;
+      --dk2:  #1A3D1C;
+      --g1:   #2C5F2D;
+      --g2:   #3D7A3E;
+      --gold: #F5A623;
+      --gold2:#E8921A;
+      --lt:   #F2F7F2;
+      --lt2:  #E4EFE4;
+      --white:#FFFFFF;
+      --muted:#6B8F6C;
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body:    'IBM Plex Sans', system-ui, sans-serif;
+      --font-mono:    'JetBrains Mono', monospace;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      background: var(--dk);
+      color: var(--white);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    ::selection { background: var(--gold); color: var(--dk); }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ── NAV ────────────────────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 4vw;
+      background: rgba(12,31,14,0.82);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(245,166,35,0.12);
+      transition: background 0.3s;
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.3rem; font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.02em;
+    }
+    .nav-logo span { color: var(--gold); }
+    .nav-links { display: flex; gap: 2rem; align-items: center; }
+    .nav-links a {
+      font-size: 0.82rem; font-weight: 500;
+      color: rgba(255,255,255,0.65);
+      letter-spacing: 0.06em; text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-cta {
+      background: var(--gold); color: var(--dk) !important;
+      padding: 0.55rem 1.4rem;
+      font-size: 0.8rem !important;
+      font-weight: 600 !important;
+      letter-spacing: 0.05em;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--gold2) !important; }
+
+    /* ── HERO ───────────────────────────────────────────────────────── */
+    #hero {
+      position: relative; min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: flex-start; justify-content: center;
+      padding: 0 8vw;
+      overflow: hidden;
+    }
+    #heroCanvas {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      z-index: 0;
+    }
+    .hero-content { position: relative; z-index: 2; max-width: 780px; }
+    .hero-tag {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.72rem; font-weight: 600;
+      color: var(--gold); letter-spacing: 0.14em; text-transform: uppercase;
+      margin-bottom: 1.8rem;
+      padding: 0.35rem 0.9rem;
+      border: 1px solid rgba(245,166,35,0.4);
+    }
+    .hero-content h1 {
+      font-family: var(--font-display);
+      font-size: clamp(3.2rem, 7vw, 6.5rem);
+      font-weight: 900; line-height: 0.95;
+      letter-spacing: -0.04em;
+      color: var(--white);
+      margin-bottom: 1.8rem;
+    }
+    .hero-content h1 em {
+      font-style: italic; color: var(--gold);
+    }
+    .hero-sub {
+      font-size: clamp(1rem, 1.6vw, 1.2rem);
+      color: rgba(255,255,255,0.65);
+      font-weight: 300; line-height: 1.7;
+      max-width: 520px; margin-bottom: 2.8rem;
+    }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-block;
+      background: var(--gold); color: var(--dk);
+      padding: 0.95rem 2.2rem;
+      font-weight: 600; font-size: 0.9rem;
+      letter-spacing: 0.04em;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: var(--gold2); transform: translateY(-2px); }
+    .btn-secondary {
+      display: inline-block;
+      border: 1px solid rgba(255,255,255,0.35);
+      color: var(--white);
+      padding: 0.95rem 2.2rem;
+      font-weight: 400; font-size: 0.9rem;
+      letter-spacing: 0.04em;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .btn-secondary:hover { border-color: var(--white); background: rgba(255,255,255,0.05); }
+    .hero-scroll {
+      position: absolute; bottom: 2.5rem; left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    }
+    .hero-scroll span {
+      font-family: var(--font-mono); font-size: 0.62rem;
+      color: rgba(255,255,255,0.35); letter-spacing: 0.14em; text-transform: uppercase;
+    }
+    .scroll-line {
+      width: 1px; height: 48px;
+      background: linear-gradient(to bottom, rgba(245,166,35,0.6), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%,100% { opacity: 0.3; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(1.2); }
+    }
+
+    /* ── STATS BAR ──────────────────────────────────────────────────── */
+    .stats-bar {
+      background: var(--dk2);
+      border-top: 1px solid rgba(245,166,35,0.2);
+      border-bottom: 1px solid rgba(245,166,35,0.2);
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      padding: 2.4rem 6vw;
+    }
+    .stat-item {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 0.4rem;
+      padding: 1rem;
+      border-right: 1px solid rgba(255,255,255,0.08);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
+      font-weight: 900;
+      color: var(--gold);
+      letter-spacing: -0.04em;
+    }
+    .stat-label {
+      font-size: 0.75rem; font-weight: 500;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.08em; text-transform: uppercase;
+      text-align: center;
+    }
+
+    /* ── SECTIONS BASE ──────────────────────────────────────────────── */
+    .section-dark { background: var(--dk); color: var(--white); }
+    .section-mid  { background: var(--dk2); color: var(--white); }
+    .section-light { background: var(--lt); color: var(--dk); }
+
+    section.padded { padding: 7rem 8vw; }
+
+    .section-tag {
+      font-family: var(--font-mono);
+      font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+    .section-tag.dark-tag { color: var(--g1); }
+    h2.section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 4.5vw, 4rem);
+      font-weight: 900; line-height: 1.05;
+      letter-spacing: -0.04em;
+      margin-bottom: 1.4rem;
+    }
+    .section-intro {
+      font-size: 1.05rem; font-weight: 300;
+      line-height: 1.8; color: rgba(255,255,255,0.6);
+      max-width: 600px; margin-bottom: 4rem;
+    }
+    .section-intro.on-light { color: var(--dk2); opacity: 0.7; }
+
+    /* ── APP OVERVIEW ───────────────────────────────────────────────── */
+    #app .app-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .app-text h2 { color: var(--dk); }
+    .app-pillars {
+      display: flex; flex-direction: column; gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+    .pillar {
+      display: flex; align-items: flex-start; gap: 1rem;
+      padding: 1.2rem 1.4rem;
+      background: var(--white);
+      border-left: 3px solid var(--g1);
+    }
+    .pillar-icon {
+      font-size: 1.4rem; flex-shrink: 0; margin-top: 0.1rem;
+    }
+    .pillar-title {
+      font-weight: 600; font-size: 0.92rem;
+      color: var(--dk); margin-bottom: 0.25rem;
+    }
+    .pillar-desc {
+      font-size: 0.82rem; color: var(--muted); line-height: 1.6;
+    }
+    .app-visual {
+      background: var(--dk);
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .app-visual::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 20px,
+        rgba(44,95,45,0.08) 20px,
+        rgba(44,95,45,0.08) 21px
+      );
+    }
+    .app-mockup {
+      position: relative; z-index: 1;
+      border: 1px solid rgba(245,166,35,0.3);
+      padding: 1.5rem;
+    }
+    .mockup-header {
+      display: flex; align-items: center; gap: 0.6rem;
+      margin-bottom: 1.2rem;
+      padding-bottom: 0.8rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .mockup-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .dot-r { background: #FF5F57; }
+    .dot-y { background: #FFBD2E; }
+    .dot-g { background: #28C840; }
+    .mockup-title { font-family: var(--font-mono); font-size: 0.7rem; color: rgba(255,255,255,0.4); margin-left: auto; }
+    .mockup-row {
+      display: flex; align-items: center; gap: 0.8rem;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .mockup-row:last-child { border-bottom: none; }
+    .mockup-row-icon { font-size: 0.9rem; width: 20px; text-align: center; }
+    .mockup-row-text { font-size: 0.75rem; color: rgba(255,255,255,0.7); }
+    .mockup-row-badge {
+      margin-left: auto;
+      font-family: var(--font-mono); font-size: 0.6rem;
+      color: var(--gold); padding: 0.15rem 0.4rem;
+      border: 1px solid rgba(245,166,35,0.4);
+    }
+
+    /* ── MODULES ────────────────────────────────────────────────────── */
+    #modules { background: var(--dk); }
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .module-card {
+      background: var(--dk);
+      padding: 1.6rem 1.2rem;
+      display: flex; flex-direction: column; gap: 0.6rem;
+      transition: background 0.25s;
+      cursor: default;
+    }
+    .module-card:hover { background: var(--dk2); }
+    .module-cat {
+      font-family: var(--font-mono); font-size: 0.58rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      font-weight: 600;
+    }
+    .module-num {
+      font-family: var(--font-display); font-size: 1.8rem;
+      font-weight: 900; color: rgba(255,255,255,0.12);
+      letter-spacing: -0.04em; line-height: 1;
+    }
+    .module-name {
+      font-size: 0.82rem; font-weight: 600;
+      color: var(--white); line-height: 1.35;
+    }
+    .module-desc {
+      font-size: 0.72rem; color: rgba(255,255,255,0.4);
+      line-height: 1.5;
+    }
+    /* category colors */
+    .cat-ag  { color: #7EC87A; }
+    .cat-tech { color: #64B5F6; }
+    .cat-com { color: var(--gold); }
+    .cat-form { color: #CE93D8; }
+    .cat-gest { color: #80CBC4; }
+    .modules-legend {
+      display: flex; gap: 2rem; flex-wrap: wrap;
+      margin-top: 2rem; padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .legend-item {
+      display: flex; align-items: center; gap: 0.5rem;
+      font-size: 0.72rem; color: rgba(255,255,255,0.5);
+    }
+    .legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+    /* ── DASHBOARDS ─────────────────────────────────────────────────── */
+    #dashboards { background: var(--lt); }
+    .dashboards-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+    .dashboard-card {
+      background: var(--white);
+      padding: 2rem;
+      border-top: 3px solid var(--g1);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .dashboard-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(12,31,14,0.12); }
+    .dashboard-card.gold-border { border-top-color: var(--gold); }
+    .db-header {
+      display: flex; align-items: center; gap: 0.8rem;
+      margin-bottom: 1.2rem;
+    }
+    .db-icon { font-size: 1.5rem; }
+    .db-title { font-weight: 700; font-size: 1rem; color: var(--dk); }
+    .db-subtitle { font-size: 0.75rem; color: var(--muted); font-family: var(--font-mono); }
+    .db-features { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .db-features li {
+      font-size: 0.83rem; color: var(--dk2);
+      padding-left: 1rem; position: relative;
+    }
+    .db-features li::before {
+      content: '→'; position: absolute; left: 0;
+      color: var(--g1); font-size: 0.7rem;
+    }
+    .dashboard-card.gold-border .db-features li::before { color: var(--gold2); }
+
+    /* ── IMPACT ─────────────────────────────────────────────────────── */
+    #impact { background: var(--dk2); }
+    .impact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    .impact-card {
+      padding: 2.5rem 1.8rem;
+      border: 1px solid rgba(255,255,255,0.1);
+      position: relative;
+      overflow: hidden;
+    }
+    .impact-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 2px;
+    }
+    .impact-card.ag::before  { background: var(--g2); }
+    .impact-card.et::before  { background: #CE93D8; }
+    .impact-card.bo::before  { background: var(--gold); }
+    .impact-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .impact-title {
+      font-family: var(--font-display);
+      font-size: 1.3rem; font-weight: 700;
+      color: var(--white); margin-bottom: 0.8rem;
+      letter-spacing: -0.02em;
+    }
+    .impact-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+    .impact-list li {
+      font-size: 0.82rem; color: rgba(255,255,255,0.65);
+      padding-left: 1rem; position: relative; line-height: 1.5;
+    }
+    .impact-list li::before {
+      content: '•'; position: absolute; left: 0;
+      color: var(--gold); font-size: 0.6rem; top: 0.2rem;
+    }
+    .impact-badge {
+      display: inline-block; margin-top: 1.5rem;
+      font-family: var(--font-mono); font-size: 0.62rem;
+      color: var(--gold); letter-spacing: 0.1em;
+      padding: 0.3rem 0.6rem; border: 1px solid rgba(245,166,35,0.3);
+    }
+
+    /* ── INNOVATIONS ────────────────────────────────────────────────── */
+    #innovations { background: var(--lt); }
+    .innovations-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--lt2);
+    }
+    .innov-card {
+      background: var(--white);
+      padding: 2rem 1.8rem;
+    }
+    .innov-num {
+      font-family: var(--font-display);
+      font-size: 3.5rem; font-weight: 900;
+      color: var(--lt2); letter-spacing: -0.05em;
+      line-height: 1; margin-bottom: 1rem;
+    }
+    .innov-title { font-weight: 700; font-size: 0.95rem; color: var(--dk); margin-bottom: 0.6rem; }
+    .innov-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+    .innov-tag {
+      display: inline-block; margin-top: 1rem;
+      font-family: var(--font-mono); font-size: 0.6rem;
+      background: var(--lt2); color: var(--g1);
+      padding: 0.25rem 0.6rem; letter-spacing: 0.1em;
+    }
+
+    /* ── VISION ─────────────────────────────────────────────────────── */
+    #vision { background: var(--dk); }
+    .vision-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .vision-text h2 { color: var(--white); }
+    .vision-quote {
+      font-family: var(--font-display);
+      font-size: clamp(1.2rem, 2vw, 1.7rem);
+      font-style: italic; font-weight: 700;
+      color: var(--gold); line-height: 1.5;
+      margin: 2rem 0;
+      padding-left: 1.5rem;
+      border-left: 2px solid var(--gold);
+    }
+    .vision-body {
+      font-size: 0.92rem; color: rgba(255,255,255,0.6);
+      line-height: 1.8;
+    }
+    .vision-pillars {
+      display: flex; flex-direction: column; gap: 1px;
+      background: rgba(255,255,255,0.06);
+    }
+    .vpillar {
+      background: rgba(255,255,255,0.03);
+      padding: 1.4rem 1.6rem;
+      display: flex; gap: 1.2rem; align-items: flex-start;
+      transition: background 0.2s;
+    }
+    .vpillar:hover { background: rgba(255,255,255,0.06); }
+    .vpillar-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 0.15rem; }
+    .vpillar-title { font-weight: 600; font-size: 0.88rem; margin-bottom: 0.3rem; color: var(--white); }
+    .vpillar-desc { font-size: 0.78rem; color: rgba(255,255,255,0.45); line-height: 1.5; }
+
+    /* ── DOWNLOAD CTA ───────────────────────────────────────────────── */
+    #download {
+      background: var(--dk2);
+      border-top: 1px solid rgba(245,166,35,0.2);
+      text-align: center;
+      padding: 7rem 8vw;
+    }
+    #download h2 { color: var(--white); margin: 1rem 0; }
+    .download-sub {
+      font-size: 1rem; color: rgba(255,255,255,0.5);
+      margin-bottom: 3rem; font-weight: 300;
+    }
+    .download-actions { display: flex; gap: 1.2rem; justify-content: center; flex-wrap: wrap; }
+    .btn-download {
+      display: inline-flex; align-items: center; gap: 0.7rem;
+      background: var(--gold); color: var(--dk);
+      padding: 1.1rem 2.5rem;
+      font-weight: 700; font-size: 0.95rem;
+      letter-spacing: 0.03em;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-download:hover { background: var(--gold2); transform: translateY(-3px); }
+    .btn-whatsapp {
+      display: inline-flex; align-items: center; gap: 0.7rem;
+      border: 1px solid rgba(255,255,255,0.25);
+      color: var(--white); padding: 1.1rem 2.5rem;
+      font-weight: 400; font-size: 0.95rem;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .btn-whatsapp:hover { border-color: var(--white); background: rgba(255,255,255,0.05); }
+    .download-note {
+      margin-top: 2rem;
+      font-family: var(--font-mono); font-size: 0.68rem;
+      color: rgba(255,255,255,0.3); letter-spacing: 0.08em;
+    }
+
+    /* ── FOOTER ─────────────────────────────────────────────────────── */
+    footer {
+      background: var(--dk);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 3rem 8vw;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 1.1rem; font-weight: 700;
+      color: var(--white);
+    }
+    .footer-logo span { color: var(--gold); }
+    .footer-tagline {
+      font-size: 0.75rem; color: rgba(255,255,255,0.3);
+      font-family: var(--font-mono); letter-spacing: 0.06em;
+    }
+    .footer-links { display: flex; gap: 2rem; }
+    .footer-links a {
+      font-size: 0.75rem; color: rgba(255,255,255,0.4);
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--white); }
+
+    /* ── REVEAL ANIMATION ───────────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s cubic-bezier(0.33,1,0.68,1),
+                  transform 0.7s cubic-bezier(0.33,1,0.68,1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ── RESPONSIVE ──────────────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .stats-bar { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(2) { border-right: none; }
+      #app .app-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .app-visual { display: none; }
+      .modules-grid { grid-template-columns: repeat(3, 1fr); }
+      .dashboards-grid { grid-template-columns: 1fr; }
+      .impact-grid { grid-template-columns: 1fr; }
+      .innovations-grid { grid-template-columns: 1fr 1fr; }
+      .vision-split { grid-template-columns: 1fr; gap: 2.5rem; }
+      .nav-links { display: none; }
+    }
+    @media (max-width: 600px) {
+      section.padded { padding: 4rem 5vw; }
+      .modules-grid { grid-template-columns: repeat(2, 1fr); }
+      .innovations-grid { grid-template-columns: 1fr; }
+      .stats-bar { grid-template-columns: repeat(2, 1fr); padding: 1.5rem 4vw; }
+      #hero { padding: 0 5vw; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAVIGATION ──────────────────────────────────────────────────── -->
+<nav>
+  <div class="nav-logo">Cultiva<span>Tech</span></div>
+  <div class="nav-links">
+    <a href="#app">L'Application</a>
+    <a href="#modules">Modules</a>
+    <a href="#dashboards">Dashboards</a>
+    <a href="#vision">Vision</a>
+    <a href="#download" class="nav-cta">Télécharger l'app</a>
+  </div>
+</nav>
+
+<!-- ── HERO ────────────────────────────────────────────────────────── -->
+<section id="hero">
+  <canvas id="heroCanvas"></canvas>
+  <div class="hero-content">
+    <span class="hero-tag">Burkina Faso · Plateforme Agro-Numérique · Phase Pilote 2026</span>
+    <h1>L'Agriculture<br><em>Numérique</em><br>du Burkina Faso</h1>
+    <p class="hero-sub">
+      15 modules intégrés. 100% fonctionnel hors ligne.
+      Une seule application pour l'ensemble de la chaîne agricole.
+    </p>
+    <div class="hero-actions">
+      <a href="#download" class="btn-primary">↓ Télécharger l'app</a>
+      <a href="#modules" class="btn-secondary">Découvrir les modules</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>Défiler</span>
+  </div>
+</section>
+
+<!-- ── STATS ────────────────────────────────────────────────────────── -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <span class="stat-num" data-count="15">15</span>
+    <span class="stat-label">Modules intégrés</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">100%</span>
+    <span class="stat-label">Fonctionnel hors ligne</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num" data-count="4">4</span>
+    <span class="stat-label">Tableaux de bord</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num" data-count="5">5</span>
+    <span class="stat-label">Catégories de services</span>
+  </div>
+</div>
+
+<!-- ── L'APPLICATION ─────────────────────────────────────────────────── -->
+<section id="app" class="section-light padded">
+  <div class="app-grid">
+    <div class="app-text">
+      <span class="section-tag dark-tag reveal">— L'Application</span>
+      <h2 class="section-title reveal reveal-delay-1" style="color:var(--dk);">
+        Une plateforme pensée pour le terrain
+      </h2>
+      <p class="section-intro on-light reveal reveal-delay-2">
+        CultivaTech est une application Android développée spécifiquement
+        pour les réalités du Burkina Faso — connectivité limitée, diversité
+        linguistique, et besoins agricoles variés.
+      </p>
+      <div class="app-pillars">
+        <div class="pillar reveal reveal-delay-2">
+          <span class="pillar-icon">📡</span>
+          <div>
+            <div class="pillar-title">Analyse sol satellite iSDAsoil</div>
+            <div class="pillar-desc">Données satellite Africa — type de sol, pH, nutriments pour chaque parcelle identifiée par coordonnées GPS.</div>
+          </div>
+        </div>
+        <div class="pillar reveal reveal-delay-3">
+          <span class="pillar-icon">🌾</span>
+          <div>
+            <div class="pillar-title">Diagnostic & fiches techniques</div>
+            <div class="pillar-desc">Moteur de diagnostic phytosanitaire + fiches cultures adaptées aux variétés locales du Sahel.</div>
+          </div>
+        </div>
+        <div class="pillar reveal reveal-delay-4">
+          <span class="pillar-icon">🔌</span>
+          <div>
+            <div class="pillar-title">100% hors ligne — sync automatique</div>
+            <div class="pillar-desc">Toutes les fonctionnalités accessibles sans connexion. Les données se synchronisent dès que le réseau revient.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="app-visual">
+      <div class="app-mockup">
+        <div class="mockup-header">
+          <span class="mockup-dot dot-r"></span>
+          <span class="mockup-dot dot-y"></span>
+          <span class="mockup-dot dot-g"></span>
+          <span class="mockup-title">CultivaTech v1.0</span>
+        </div>
+        <div class="mockup-row">
+          <span class="mockup-row-icon">🌱</span>
+          <span class="mockup-row-text">Analyse sol — Parcelle Koudougou</span>
+          <span class="mockup-row-badge">✓ SYNC</span>
+        </div>
+        <div class="mockup-row">
+          <span class="mockup-row-icon">🌦️</span>
+          <span class="mockup-row-text">Prévision météo 7 jours</span>
+          <span class="mockup-row-badge">EN LIGNE</span>
+        </div>
+        <div class="mockup-row">
+          <span class="mockup-row-icon">📊</span>
+          <span class="mockup-row-text">Marché — Tomate : 250 FCFA/kg</span>
+          <span class="mockup-row-badge">LIVE</span>
+        </div>
+        <div class="mockup-row">
+          <span class="mockup-row-icon">🎓</span>
+          <span class="mockup-row-text">Portail étudiant — 3 PDFs actifs</span>
+          <span class="mockup-row-badge">+1 200 F</span>
+        </div>
+        <div class="mockup-row">
+          <span class="mockup-row-icon">🏪</span>
+          <span class="mockup-row-text">Boutiques à proximité — 4 km</span>
+          <span class="mockup-row-badge">GPS</span>
+        </div>
+        <div class="mockup-row">
+          <span class="mockup-row-icon">👷</span>
+          <span class="mockup-row-text">Ouvriers — 3 actifs · Quota ♀ 40%</span>
+          <span class="mockup-row-badge">QUOTA</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── LES 15 MODULES ────────────────────────────────────────────────── -->
+<section id="modules" class="section-dark padded">
+  <span class="section-tag reveal">— Les Modules</span>
+  <h2 class="section-title reveal reveal-delay-1">15 modules.<br>Une seule application.</h2>
+  <p class="section-intro reveal reveal-delay-2">
+    Chaque module répond à un besoin précis de la chaîne agricole burkinabè —
+    du sol à la vente, de la formation à la gestion.
+  </p>
+
+  <div class="modules-grid reveal reveal-delay-2">
+    <!-- AGRONOMIQUE -->
+    <div class="module-card">
+      <span class="module-cat cat-ag">Agronomique</span>
+      <span class="module-num">01</span>
+      <span class="module-name">Analyse de Sol</span>
+      <span class="module-desc">iSDAsoil satellite Africa — pH, nutriments, type de sol</span>
+    </div>
+    <div class="module-card">
+      <span class="module-cat cat-ag">Agronomique</span>
+      <span class="module-num">02</span>
+      <span class="module-name">Diagnostic Phytosanitaire</span>
+      <span class="module-desc">Identification maladies et ravageurs, recommandations traitements</span>
+    </div>
+    <div class="module-card">
+      <span class="module-cat cat-ag">Agronomique</span>
+      <span class="module-num">03</span>
+      <span class="module-name">Fiches Techniques Cultures</span>
+      <span class="module-desc">Guide complet pour 12+ cultures adaptées au Sahel</span>
+    </div>
+    <div class="module-card">
+      <span class="module-cat cat-ag">Agronomique</span>
+      <span class="module-num">04</span>
+      <span class="module-name">Calendrier Cultural</span>
+      <span class="module-desc">Planification des semis, entretien et récoltes par culture</span>
+    </div>
+    <!-- TECHNOLOGIE -->
+    <div class="module-card">
+      <span class="module-cat cat-tech">Technologie</span>
+      <span class="module-num">05</span>
+      <span class="module-name">Prévisions Météo</span>
+      <span class="module-desc">7 jours de prévisions météorologiques localisées</span>
+    </div>
+    <div class="module-card">
+      <span class="module-cat cat-tech">Technologie</span>
+      <span class="module-num">06</span>
+      <span class="module-name">IoT Capteurs</span>
+      <span class="module-desc">Intégration capteurs sol et environnementaux connectés</span>
+    </div>
+    <div class="module-card">
+      <span class="module-cat cat-tech">Technologie</span>
+      <span class="module-num">07</span>
+      <span class="module-name">Tableau de Bord Agriculteur</span>
+      <span class="module-desc">Vue d'ensemble cultures, météo, dépenses et revenus</span>
+    </div>
+    <!-- COMMERCE -->
+    <div class="module-card">
+      <span class="module-cat cat-com">Commerce</span>
+      <span class="module-num">08</span>
+      <span class="module-name">Marché Numérique</span>
+      <span class="module-desc">Annonces vente/achat produits agricoles avec géolocalisation</span>
+    </div>
+    <div class="module-card">
+      <span class="module-cat cat-com">Commerce</span>
+      <span class="module-num">09</span>
+      <span class="module-name">Boutiques d'Intrants</span>
+      <span class="module-desc">Annuaire géolocalisé des boutiques agréées, stocks et prix</span>
+    </div>
+    <div class="module-card">
+      <span class="module-cat cat-com">Commerce</span>
+      <span class="module-num">10</span>
+      <span class="module-name">Prix de Référence</span>
+      <span class="module-desc">Prix moyen du marché par culture pour éviter les exploitations</span>
+    </div>
+    <!-- FORMATION -->
+    <div class="module-card">
+      <span class="module-cat cat-form">Formation</span>
+      <span class="module-num">11</span>
+      <span class="module-name">Portail Étudiant</span>
+      <span class="module-desc">Vente de PDFs agricoles, revenus LigdiCash — étudiants rémunérés</span>
+    </div>
+    <div class="module-card">
+      <span class="module-cat cat-form">Formation</span>
+      <span class="module-num">12</span>
+      <span class="module-name">Formation en Ligne</span>
+      <span class="module-desc">Modules de formation pratique accessibles hors ligne</span>
+    </div>
+    <!-- GESTION -->
+    <div class="module-card">
+      <span class="module-cat cat-gest">Gestion</span>
+      <span class="module-num">13</span>
+      <span class="module-name">Gestion des Ouvriers</span>
+      <span class="module-desc">Suivi présences, salaires — système de quota autonomisation femmes</span>
+    </div>
+    <div class="module-card">
+      <span class="module-cat cat-gest">Gestion</span>
+      <span class="module-num">14</span>
+      <span class="module-name">Gestion de Production</span>
+      <span class="module-desc">Suivi des cultures actives, intrants utilisés, rendements</span>
+    </div>
+    <div class="module-card">
+      <span class="module-cat cat-gest">Gestion</span>
+      <span class="module-num">15</span>
+      <span class="module-name">Administration</span>
+      <span class="module-desc">Tableau de bord institutionnel, statistiques et rapports territoriaux</span>
+    </div>
+  </div>
+
+  <div class="modules-legend reveal">
+    <div class="legend-item"><span class="legend-dot" style="background:#7EC87A"></span>Agronomique (4)</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#64B5F6"></span>Technologie (3)</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#F5A623"></span>Commerce (3)</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#CE93D8"></span>Formation (2)</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#80CBC4"></span>Gestion (3)</div>
+  </div>
+</section>
+
+<!-- ── LES DASHBOARDS ────────────────────────────────────────────────── -->
+<section id="dashboards" class="section-light padded">
+  <span class="section-tag dark-tag reveal">— Les Tableaux de Bord</span>
+  <h2 class="section-title reveal reveal-delay-1" style="color:var(--dk);">Chaque acteur a<br>sa propre vue</h2>
+  <p class="section-intro on-light reveal reveal-delay-2">
+    Quatre tableaux de bord distincts, conçus pour les besoins spécifiques de chaque utilisateur
+    de la plateforme CultivaTech.
+  </p>
+
+  <div class="dashboards-grid">
+    <div class="dashboard-card reveal reveal-delay-1">
+      <div class="db-header">
+        <span class="db-icon">🌾</span>
+        <div>
+          <div class="db-title">Dashboard Agriculteur</div>
+          <div class="db-subtitle">Vue terrain — production & marché</div>
+        </div>
+      </div>
+      <ul class="db-features">
+        <li>Cultures actives et stades de croissance</li>
+        <li>Alertes météo et recommandations culturales</li>
+        <li>Prix du marché en temps réel</li>
+        <li>Suivi des dépenses et revenus</li>
+        <li>Gestion des ouvriers et quota femmes</li>
+        <li>Diagnostic sol de la parcelle</li>
+      </ul>
+    </div>
+    <div class="dashboard-card gold-border reveal reveal-delay-2">
+      <div class="db-header">
+        <span class="db-icon">🎓</span>
+        <div>
+          <div class="db-title">Dashboard Étudiant</div>
+          <div class="db-subtitle">Portail revenus — PDFs & formations</div>
+        </div>
+      </div>
+      <ul class="db-features">
+        <li>Mes PDFs publiés et nombre de téléchargements</li>
+        <li>Revenus accumulés et historique</li>
+        <li>Retrait via LigdiCash (Mobile Money)</li>
+        <li>Statistiques de performance des documents</li>
+        <li>Accès aux formations disponibles</li>
+        <li>Profil étudiant et certifications</li>
+      </ul>
+    </div>
+    <div class="dashboard-card reveal reveal-delay-3">
+      <div class="db-header">
+        <span class="db-icon">⚙️</span>
+        <div>
+          <div class="db-title">Dashboard Admin</div>
+          <div class="db-subtitle">Gestion globale de la plateforme</div>
+        </div>
+      </div>
+      <ul class="db-features">
+        <li>Validation et gestion des boutiques d'intrants</li>
+        <li>Modération du marché numérique</li>
+        <li>Gestion des utilisateurs et rôles</li>
+        <li>Suivi des transactions et paiements</li>
+        <li>Paramètres et configuration de l'application</li>
+        <li>Rapports d'activité en temps réel</li>
+      </ul>
+    </div>
+    <div class="dashboard-card reveal reveal-delay-4">
+      <div class="db-header">
+        <span class="db-icon">📊</span>
+        <div>
+          <div class="db-title">Dashboard Institutionnel</div>
+          <div class="db-subtitle">Statistiques & rapports territoriaux</div>
+        </div>
+      </div>
+      <ul class="db-features">
+        <li>Cartographie des agriculteurs par province</li>
+        <li>Statistiques de production par culture</li>
+        <li>Rapports d'impact et indicateurs ODD</li>
+        <li>Suivi des boutiques d'intrants agréées</li>
+        <li>Indicateurs d'autonomisation des femmes</li>
+        <li>Export de données pour les décideurs</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ── IMPACT ────────────────────────────────────────────────────────── -->
+<section id="impact" class="section-mid padded">
+  <span class="section-tag reveal">— Impact Socio-Économique</span>
+  <h2 class="section-title reveal reveal-delay-1">Un impact concret<br>pour chaque acteur</h2>
+  <p class="section-intro reveal reveal-delay-2">
+    CultivaTech crée de la valeur pour l'ensemble des parties prenantes
+    de la chaîne agricole burkinabè.
+  </p>
+
+  <div class="impact-grid">
+    <div class="impact-card ag reveal reveal-delay-1">
+      <div class="impact-icon">🌱</div>
+      <div class="impact-title">Agriculteurs</div>
+      <ul class="impact-list">
+        <li>Accès aux données sol satellite pour optimiser les intrants</li>
+        <li>Diagnostic phytosanitaire immédiat sans expert</li>
+        <li>Prix de référence pour négocier équitablement</li>
+        <li>Géolocalisation des boutiques d'intrants les plus proches</li>
+        <li>Gestion des ouvriers avec système de quota pour les femmes</li>
+        <li>Toutes fonctionnalités accessibles sans internet</li>
+      </ul>
+      <span class="impact-badge">IMPACT TERRAIN</span>
+    </div>
+    <div class="impact-card et reveal reveal-delay-2">
+      <div class="impact-icon">🎓</div>
+      <div class="impact-title">Étudiants</div>
+      <ul class="impact-list">
+        <li>Publication de PDFs agricoles et perception de revenus</li>
+        <li>Paiements automatiques via LigdiCash (Mobile Money)</li>
+        <li>Contribution à la diffusion des connaissances agricoles</li>
+        <li>Tableau de bord de suivi des téléchargements</li>
+        <li>Accès à des formations pratiques supplémentaires</li>
+        <li>Insertion professionnelle dans l'agri-numérique</li>
+      </ul>
+      <span class="impact-badge">PORTAIL ÉTUDIANT</span>
+    </div>
+    <div class="impact-card bo reveal reveal-delay-3">
+      <div class="impact-icon">🏪</div>
+      <div class="impact-title">Boutiques d'Intrants</div>
+      <ul class="impact-list">
+        <li>Visibilité numérique sur l'ensemble du territoire</li>
+        <li>Géolocalisation pour attirer les agriculteurs à proximité</li>
+        <li>Mise en avant des stocks et prix en temps réel</li>
+        <li>Canal de commande direct depuis l'app</li>
+        <li>Accès à une clientèle élargie au-delà du périmètre local</li>
+        <li>Intégration dans l'écosystème CultivaTech</li>
+      </ul>
+      <span class="impact-badge">RÉSEAU COMMERCIAL</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── INNOVATIONS ───────────────────────────────────────────────────── -->
+<section id="innovations" class="section-light padded">
+  <span class="section-tag dark-tag reveal">— Innovations Majeures</span>
+  <h2 class="section-title reveal reveal-delay-1" style="color:var(--dk);">Ce qui nous distingue</h2>
+
+  <div class="innovations-grid reveal reveal-delay-2">
+    <div class="innov-card">
+      <div class="innov-num">01</div>
+      <div class="innov-title">Analyse Sol par Satellite</div>
+      <div class="innov-desc">Intégration iSDAsoil Africa — base de données satellitaire couvrant toute l'Afrique subsaharienne. Chaque agriculteur connaît son sol sans analyse physique.</div>
+      <span class="innov-tag">iSDAsoil API v2</span>
+    </div>
+    <div class="innov-card">
+      <div class="innov-num">02</div>
+      <div class="innov-title">100% Fonctionnel Hors Ligne</div>
+      <div class="innov-desc">L'intégralité des 15 modules fonctionne sans connexion internet. Données synchronisées automatiquement à la prochaine connexion disponible.</div>
+      <span class="innov-tag">Room DB + Sync</span>
+    </div>
+    <div class="innov-card">
+      <div class="innov-num">03</div>
+      <div class="innov-title">Portail Étudiant Rémunéré</div>
+      <div class="innov-desc">Premier système qui rémunère les étudiants burkinabè pour partager leurs connaissances agricoles. Paiements automatiques via LigdiCash.</div>
+      <span class="innov-tag">LigdiCash · PDF Market</span>
+    </div>
+    <div class="innov-card">
+      <div class="innov-num">04</div>
+      <div class="innov-title">Système de Quota Femmes</div>
+      <div class="innov-desc">Module de gestion des ouvriers avec quota configurable pour l'autonomisation des femmes en agriculture — une innovation sociale unique en Afrique de l'Ouest.</div>
+      <span class="innov-tag">Autonomisation ♀</span>
+    </div>
+    <div class="innov-card">
+      <div class="innov-num">05</div>
+      <div class="innov-title">Marché avec Prix de Référence</div>
+      <div class="innov-desc">Le marché numérique calcule automatiquement le prix de référence moyen par culture et par zone, protégeant les agriculteurs contre les prix abusifs.</div>
+      <span class="innov-tag">GPS · Prix équitable</span>
+    </div>
+    <div class="innov-card">
+      <div class="innov-num">06</div>
+      <div class="innov-title">Architecture Multi-Dashboard</div>
+      <div class="innov-desc">4 tableaux de bord distincts (Agriculteur, Étudiant, Admin, Institutionnel) offrant des vues adaptées à chaque niveau de la chaîne de valeur agricole.</div>
+      <span class="innov-tag">4 profils · Supabase RLS</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── VISION ────────────────────────────────────────────────────────── -->
+<section id="vision" class="section-dark padded">
+  <div class="vision-split">
+    <div class="vision-text">
+      <span class="section-tag reveal">— Société Agrobusiness Wend-lakonta</span>
+      <h2 class="section-title reveal reveal-delay-1">Une entreprise révolutionnaire<br>au service du Burkina</h2>
+      <blockquote class="vision-quote reveal reveal-delay-2">
+        "Numériser l'agriculture burkinabè, c'est nourrir une nation entière avec les outils du 21ème siècle."
+      </blockquote>
+      <p class="vision-body reveal reveal-delay-3">
+        La Société Agrobusiness Wend-lakonta est l'entreprise derrière CultivaTech.
+        Notre mission : transformer l'agriculture du Burkina Faso grâce au numérique,
+        à la formation et à des outils adaptés aux réalités du terrain.
+        Nous croyons que chaque agriculteur burkinabè mérite les mêmes outils que ceux
+        disponibles dans les pays les plus avancés du monde.
+      </p>
+    </div>
+    <div class="vision-pillars reveal reveal-delay-2">
+      <div class="vpillar">
+        <span class="vpillar-icon">🚀</span>
+        <div>
+          <div class="vpillar-title">Production Agricole Moderne</div>
+          <div class="vpillar-desc">Accompagnement des exploitations burkinabè avec des pratiques agricoles durables et des intrants de qualité.</div>
+        </div>
+      </div>
+      <div class="vpillar">
+        <span class="vpillar-icon">💻</span>
+        <div>
+          <div class="vpillar-title">Développement Numérique</div>
+          <div class="vpillar-desc">CultivaTech comme moteur de la transformation numérique agricole — de la parcelle au marché.</div>
+        </div>
+      </div>
+      <div class="vpillar">
+        <span class="vpillar-icon">🎓</span>
+        <div>
+          <div class="vpillar-title">Formation & Transfert de Savoir</div>
+          <div class="vpillar-desc">Formation des agriculteurs, des étudiants et des acteurs de la chaîne à travers le portail CultivaTech.</div>
+        </div>
+      </div>
+      <div class="vpillar">
+        <span class="vpillar-icon">👩‍🌾</span>
+        <div>
+          <div class="vpillar-title">Autonomisation des Femmes</div>
+          <div class="vpillar-desc">Système de quota intégré pour garantir la participation et la rémunération équitable des femmes dans l'agriculture.</div>
+        </div>
+      </div>
+      <div class="vpillar">
+        <span class="vpillar-icon">🌍</span>
+        <div>
+          <div class="vpillar-title">Vision Panafricaine</div>
+          <div class="vpillar-desc">Un modèle conçu pour le Burkina Faso, extensible à l'ensemble de l'Afrique de l'Ouest subsaharienne.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── DOWNLOAD ──────────────────────────────────────────────────────── -->
+<section id="download">
+  <span class="section-tag reveal" style="display:block;text-align:center;">— Téléchargement</span>
+  <h2 class="section-title reveal reveal-delay-1">
+    Rejoindre la phase pilote<br><em style="font-style:italic;color:var(--gold);">CultivaTech</em>
+  </h2>
+  <p class="download-sub reveal reveal-delay-2">
+    Application Android — Disponible en téléchargement direct.<br>
+    Aucun abonnement requis pendant la phase pilote.
+  </p>
+  <div class="download-actions reveal reveal-delay-3">
+    <a href="https://drive.google.com/file/d/12qhelKm9jRLbQhrFjHofAcJy5m9AA1wv/view?usp=drive_link" class="btn-download" target="_blank">
+      📱 Télécharger l'APK Android
+    </a>
+    <a href="https://wa.me/22670417001" class="btn-whatsapp" target="_blank">
+      💬 Nous contacter sur WhatsApp
+    </a>
+  </div>
+  <p class="download-note reveal reveal-delay-4">
+    Android 8.0+ requis · Gratuit pendant la phase pilote · Activez "Sources inconnues" pour l'installation
+  </p>
+</section>
+
+<!-- ── FOOTER ─────────────────────────────────────────────────────────── -->
+<footer>
+  <div>
+    <div class="footer-logo">Cultiva<span>Tech</span></div>
+    <div class="footer-tagline" style="margin-top:0.4rem;">Société Agrobusiness Wend-lakonta · Burkina Faso · 2026</div>
+  </div>
+  <div class="footer-links">
+    <a href="#app">Application</a>
+    <a href="#modules">Modules</a>
+    <a href="#dashboards">Dashboards</a>
+    <a href="#download">Télécharger</a>
+  </div>
+</footer>
+
+<!-- ── SCRIPTS ──────────────────────────────────────────────────────── -->
+<script>
+  // ── CANVAS HERO ANIMATION (particules / champ agricole) ────────────
+  (function () {
+    const canvas = document.getElementById('heroCanvas');
+    const ctx    = canvas.getContext('2d');
+    let W, H, particles;
+
+    function resize() {
+      W = canvas.width  = canvas.offsetWidth;
+      H = canvas.height = canvas.offsetHeight;
+      initParticles();
+    }
+
+    function initParticles() {
+      particles = Array.from({ length: 90 }, () => ({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        r: Math.random() * 1.6 + 0.4,
+        vx: (Math.random() - 0.5) * 0.28,
+        vy: (Math.random() - 0.5) * 0.28,
+        gold: Math.random() < 0.22,
+        alpha: Math.random() * 0.5 + 0.15,
+      }));
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+
+      // Connections between nearby particles
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 100) {
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(44,95,45,${(1 - dist / 100) * 0.25})`;
+            ctx.lineWidth = 0.5;
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      // Particles
+      for (const p of particles) {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = p.gold
+          ? `rgba(245,166,35,${p.alpha})`
+          : `rgba(61,122,62,${p.alpha})`;
+        ctx.fill();
+
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0) p.x = W;
+        if (p.x > W) p.x = 0;
+        if (p.y < 0) p.y = H;
+        if (p.y > H) p.y = 0;
+      }
+
+      requestAnimationFrame(draw);
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+    draw();
+  })();
+
+  // ── SCROLL REVEAL ───────────────────────────────────────────────────
+  (function () {
+    const els = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(
+      entries => entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      }),
+      { threshold: 0.12 }
+    );
+    els.forEach(el => observer.observe(el));
+  })();
+
+  // ── NAVBAR BACKGROUND ON SCROLL ─────────────────────────────────────
+  (function () {
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      nav.style.background = window.scrollY > 60
+        ? 'rgba(12,31,14,0.97)'
+        : 'rgba(12,31,14,0.82)';
+    }, { passive: true });
+  })();
+</script>
+</body>
+</html>
