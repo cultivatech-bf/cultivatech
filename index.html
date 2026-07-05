@@ -627,8 +627,8 @@
     <span class="stat-label">Tableaux de bord</span>
   </div>
   <div class="stat-item">
-    <span class="stat-num" data-count="5">5</span>
-    <span class="stat-label">Catégories de services</span>
+    <span class="stat-num" id="install-count">—</span>
+    <span class="stat-label">Utilisateurs pilote</span>
   </div>
 </div>
 
@@ -1102,6 +1102,38 @@
 
 <!-- ── SCRIPTS ──────────────────────────────────────────────────────── -->
 <script>
+  // ── COMPTEUR UTILISATEURS PILOTE (Supabase live) ────────────────────
+  (function () {
+    const el = document.getElementById('install-count');
+
+    function animateCount(target) {
+      let current = 0;
+      const step = Math.max(1, Math.floor(target / 40));
+      const timer = setInterval(() => {
+        current = Math.min(current + step, target);
+        el.textContent = current;
+        if (current >= target) clearInterval(timer);
+      }, 35);
+    }
+
+    fetch('https://vyqhzagajlbosikzfnit.supabase.co/rest/v1/app_installs?select=device_id', {
+      headers: {
+        'apikey':        'sb_publishable_7Ax0Jt6liUTdWmyu8IAXZw_fSofp-3s',
+        'Authorization': 'Bearer sb_publishable_7Ax0Jt6liUTdWmyu8IAXZw_fSofp-3s',
+        'Prefer':        'count=exact'
+      }
+    })
+    .then(res => {
+      const range = res.headers.get('content-range'); // "0-N/TOTAL"
+      if (range) {
+        const total = parseInt(range.split('/')[1], 10);
+        if (!isNaN(total)) { animateCount(total); return; }
+      }
+      return res.json().then(d => animateCount(Array.isArray(d) ? d.length : 0));
+    })
+    .catch(() => { el.textContent = '—'; });
+  })();
+
   // ── CANVAS HERO ANIMATION (particules / champ agricole) ────────────
   (function () {
     const canvas = document.getElementById('heroCanvas');
