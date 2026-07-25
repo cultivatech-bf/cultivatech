@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CultivaTech — L'Agriculture Numérique du Burkina Faso</title>
+  <title>CultivaTech – L'Agriculture Numérique du Burkina Faso</title>
   <meta name="description" content="CultivaTech : 15 modules intégrés, 100% fonctionnel hors ligne. La plateforme agro-numérique dédiée aux agriculteurs du Burkina Faso." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -83,10 +83,15 @@
       padding: 0 8vw;
       overflow: hidden;
     }
-    /* Photo terrain agritech en fond du hero (déposez assets/hero.jpg dans le dépôt) */
+    /* Photo terrain agritech en fond du hero.
+       Déposez assets/hero.jpg (ou .png) dans le dépôt. Les deux extensions sont
+       tentées, puis un dégradé de repli : le hero reste présentable même sans photo. */
     #heroPhoto {
       position: absolute; inset: 0;
-      background-image: url('assets/hero.png');
+      background-image:
+        url('assets/hero.jpg'),
+        url('assets/hero.png'),
+        linear-gradient(135deg, #142A1C 0%, #0D0E22 55%, #1B2350 100%);
       background-size: cover;
       background-position: center 30%;
       z-index: 0;
@@ -432,7 +437,7 @@
     #impact { background: var(--dk2); }
     .impact-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 2rem;
     }
     .impact-card {
@@ -633,8 +638,110 @@
     .reveal-delay-3 { transition-delay: 0.3s; }
     .reveal-delay-4 { transition-delay: 0.4s; }
 
+    /* ── EMPLACEMENTS PHOTO ──────────────────────────────────────────────
+       Chaque .photo affiche assets/<nom>.jpg si le fichier existe, sinon un
+       dégradé sobre avec le libellé de l'emplacement. On peut donc publier le
+       site avant d'avoir les photos, puis les déposer une par une.
+       Le nom du fichier attendu est indiqué par l'attribut data-file.        */
+    .photo {
+      position: relative; overflow: hidden;
+      border-radius: 14px;
+      background-color: #101331;
+      background-size: cover; background-position: center;
+      isolation: isolate;
+    }
+    .photo::before {
+      content: ''; position: absolute; inset: 0; z-index: -1;
+      background:
+        linear-gradient(140deg, rgba(43,58,143,0.55) 0%, rgba(13,14,34,0.9) 60%),
+        radial-gradient(ellipse 80% 70% at 25% 20%, rgba(62,202,122,0.28) 0%, transparent 70%);
+    }
+    /* Libellé de repli : masqué dès qu'une vraie photo couvre la tuile */
+    .photo::after {
+      content: attr(data-file);
+      position: absolute; left: 0; right: 0; bottom: 0;
+      padding: 0.55rem 0.8rem;
+      font-family: var(--font-body); font-size: 0.66rem; font-weight: 600;
+      letter-spacing: 0.04em;
+      color: rgba(255,255,255,0.42);
+      background: linear-gradient(to top, rgba(13,14,34,0.75), transparent);
+    }
+    .photo.has-image::after { content: none; }
+    .photo.has-image::before { content: none; }
+
+    /* ── BANDEAU TERRAIN ─────────────────────────────────────────────── */
+    .terrain-grid {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr;
+      grid-template-rows: 210px 210px;
+      gap: 1rem;
+      margin-top: 3rem;
+    }
+    .terrain-grid .photo:nth-child(1) { grid-row: span 2; }
+    .terrain-cap {
+      position: absolute; left: 1rem; bottom: 1rem; z-index: 2;
+      max-width: 85%;
+      font-family: var(--font-body);
+      font-size: 0.82rem; font-weight: 700; color: var(--white);
+      text-shadow: 0 2px 12px rgba(0,0,0,0.85);
+    }
+    .terrain-cap small {
+      display: block; font-weight: 400; font-size: 0.72rem;
+      color: rgba(255,255,255,0.72); margin-top: 0.15rem;
+    }
+
+    /* ── CAPTURES D'ÉCRAN ────────────────────────────────────────────── */
+    .screens-row {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 1.4rem; margin-top: 3rem;
+    }
+    .screen-frame {
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 24px; padding: 8px;
+      background: linear-gradient(160deg, rgba(255,255,255,0.09), rgba(255,255,255,0.02));
+      box-shadow: 0 18px 45px rgba(0,0,0,0.35);
+      transition: transform 0.35s ease;
+    }
+    .screen-frame:hover { transform: translateY(-6px); }
+    .screen-frame .photo { aspect-ratio: 9 / 19; border-radius: 17px; }
+    .screen-label {
+      display: block; text-align: center; margin-top: 0.8rem;
+      font-family: var(--font-body); font-size: 0.78rem; font-weight: 600;
+      color: rgba(255,255,255,0.62);
+    }
+    .section-light .screen-label { color: var(--muted); }
+    .section-light .screen-frame {
+      border-color: rgba(13,14,34,0.1);
+      background: linear-gradient(160deg, rgba(13,14,34,0.06), rgba(13,14,34,0.01));
+      box-shadow: 0 18px 40px rgba(13,14,34,0.12);
+    }
+
+    /* ── PHOTO DANS LA SECTION VISION ────────────────────────────────── */
+    .vision-photo { height: 260px; margin-bottom: 2rem; }
+
+    /* ── PREUVE / CRÉDIBILITÉ ────────────────────────────────────────── */
+    .proof-band {
+      display: flex; flex-wrap: wrap; gap: 0.7rem;
+      margin-top: 2.4rem;
+    }
+    .proof-chip {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      font-family: var(--font-body); font-size: 0.8rem; font-weight: 700;
+      color: var(--dk);
+      background: rgba(253,203,110,0.9);
+      border-radius: 50px;
+    }
+    .proof-chip.ghost {
+      background: transparent; color: rgba(255,255,255,0.82);
+      border: 1px solid rgba(255,255,255,0.22);
+    }
+
     /* ── RESPONSIVE ──────────────────────────────────────────────────── */
     @media (max-width: 900px) {
+      .terrain-grid { grid-template-columns: 1fr 1fr; grid-template-rows: 180px 180px 180px; }
+      .terrain-grid .photo:nth-child(1) { grid-row: span 1; grid-column: span 2; }
+      .screens-row { grid-template-columns: repeat(2, 1fr); }
       .stats-bar { grid-template-columns: repeat(2, 1fr); }
       .stat-item:nth-child(2) { border-right: none; }
       #app .app-grid { grid-template-columns: 1fr; gap: 2.5rem; }
@@ -652,6 +759,9 @@
       .innovations-grid { grid-template-columns: 1fr; }
       .stats-bar { grid-template-columns: repeat(2, 1fr); padding: 1.5rem 4vw; }
       #hero { padding: 0 5vw; }
+      .terrain-grid { grid-template-columns: 1fr; grid-template-rows: repeat(4, 170px); }
+      .terrain-grid .photo:nth-child(1) { grid-column: span 1; }
+      .screens-row { grid-template-columns: 1fr 1fr; gap: 1rem; }
     }
   </style>
 </head>
@@ -664,6 +774,7 @@
     <a href="#app">L'Application</a>
     <a href="#modules">Modules</a>
     <a href="#dashboards">Dashboards</a>
+    <a href="#terrain">Terrain</a>
     <a href="#vision">Vision</a>
     <a href="#download" class="nav-cta">Télécharger l'app</a>
   </div>
@@ -677,8 +788,8 @@
     <span class="hero-tag">Burkina Faso · Plateforme Agro-Numérique · Phase Pilote 2026</span>
     <h1>L'Agriculture<br><em>Numérique</em><br>du Burkina Faso</h1>
     <p class="hero-sub">
-      Du sol satellite au marché, du drone à la formation —
-      15 modules intégrés, 100% fonctionnels hors ligne, pour l'ensemble
+      De la parcelle cartographiée au marché, de l'analyse de sol à la formation –
+      18 modules intégrés, 100% fonctionnels hors ligne, pour l'ensemble
       de la chaîne agricole burkinabè.
     </p>
     <div class="hero-actions">
@@ -695,7 +806,7 @@
 <!-- ── STATS ────────────────────────────────────────────────────────── -->
 <div class="stats-bar">
   <div class="stat-item">
-    <span class="stat-num" data-count="15">15</span>
+    <span class="stat-num" data-count="18">18</span>
     <span class="stat-label">Modules intégrés</span>
   </div>
   <div class="stat-item">
@@ -716,21 +827,21 @@
 <section id="app" class="section-light padded">
   <div class="app-grid">
     <div class="app-text">
-      <span class="section-tag dark-tag reveal">— L'Application</span>
+      <span class="section-tag dark-tag reveal">– L'Application</span>
       <h2 class="section-title reveal reveal-delay-1" style="color:var(--dk);">
         Une plateforme pensée pour le terrain
       </h2>
       <p class="section-intro on-light reveal reveal-delay-2">
         CultivaTech est une application Android développée spécifiquement
-        pour les réalités du Burkina Faso — connectivité limitée, diversité
+        pour les réalités du Burkina Faso – connectivité limitée, diversité
         linguistique, et besoins agricoles variés.
       </p>
       <div class="app-pillars">
         <div class="pillar reveal reveal-delay-2">
           <span class="pillar-icon"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#1E8449" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><path d="M13 7 9 3 5 7l4 4"/><path d="m17 11 4 4-4 4-4-4"/><path d="m8 12 4 4"/><path d="m16 8 3-3"/><path d="M9 21a6 6 0 0 0-6-6"/></svg></span>
           <div>
-            <div class="pillar-title">Analyse sol satellite iSDAsoil</div>
-            <div class="pillar-desc">Données satellite Africa — type de sol, pH, nutriments pour chaque parcelle identifiée par coordonnées GPS.</div>
+            <div class="pillar-title">Parcelle cartographiée, sol analysé</div>
+            <div class="pillar-desc">L'agriculteur trace sa parcelle au doigt, en marchant avec le GPS ou en saisissant ses coordonnées cadastrales. Le sol est ensuite analysé sur une grille de 30 m – pH, azote, carbone, texture – et non plus en un seul point.</div>
           </div>
         </div>
         <div class="pillar reveal reveal-delay-3">
@@ -743,8 +854,15 @@
         <div class="pillar reveal reveal-delay-4">
           <span class="pillar-icon"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#1E8449" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><path d="M12 22v-5"/><path d="M9 8V2"/><path d="M15 8V2"/><path d="M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8z"/></svg></span>
           <div>
-            <div class="pillar-title">100% hors ligne — sync automatique</div>
+            <div class="pillar-title">100% hors ligne – sync automatique</div>
             <div class="pillar-desc">Toutes les fonctionnalités accessibles sans connexion. Les données se synchronisent dès que le réseau revient.</div>
+          </div>
+        </div>
+        <div class="pillar reveal reveal-delay-4">
+          <span class="pillar-icon"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#1E8449" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><path d="M12 2.7s5.5 5.6 5.5 9.6a5.5 5.5 0 0 1-11 0c0-4 5.5-9.6 5.5-9.6z"/><path d="M9.5 13.5a2.5 2.5 0 0 0 2.5 2.5"/></svg></span>
+          <div>
+            <div class="pillar-title">Plan d'arrosage et veille sécheresse</div>
+            <div class="pillar-desc">Doses d'eau calculées selon le sol, la culture et la superficie – exprimées en arrosoirs ou en fûts. En culture pluviale, une alerte propose un apport de secours après plusieurs jours sans pluie utile.</div>
           </div>
         </div>
       </div>
@@ -759,8 +877,18 @@
         </div>
         <div class="mockup-row">
           <span class="mockup-row-icon"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="#3ECA7A" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"/><path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"/></svg></span>
-          <span class="mockup-row-text">Analyse sol</span>
+          <span class="mockup-row-text">Analyse sol – 12 points</span>
           <span class="mockup-row-badge">✓ SYNC</span>
+        </div>
+        <div class="mockup-row">
+          <span class="mockup-row-icon"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="#3ECA7A" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z"/><path d="M9 3v15"/><path d="M15 6v15"/></svg></span>
+          <span class="mockup-row-text">Parcelle Zone Nord – 2 850 m²</span>
+          <span class="mockup-row-badge">TRACÉE</span>
+        </div>
+        <div class="mockup-row">
+          <span class="mockup-row-icon"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="#3ECA7A" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><path d="M12 2.7s5.5 5.6 5.5 9.6a5.5 5.5 0 0 1-11 0c0-4 5.5-9.6 5.5-9.6z"/><path d="M9.5 13.5a2.5 2.5 0 0 0 2.5 2.5"/></svg></span>
+          <span class="mockup-row-text">Arrosage – 28 arrosoirs</span>
+          <span class="mockup-row-badge">AUJOURD'HUI</span>
         </div>
         <div class="mockup-row">
           <span class="mockup-row-icon"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="#3ECA7A" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><path d="M17.5 19a4.5 4.5 0 1 0 0-9h-1.8A7 7 0 1 0 4 15.3"/><path d="M8 19v1"/><path d="M8 14v1"/><path d="M16 19v1"/><path d="M12 21v1"/></svg></span>
@@ -769,7 +897,7 @@
         </div>
         <div class="mockup-row">
           <span class="mockup-row-icon"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="#3ECA7A" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><path d="M3 3v18h18"/><path d="M8 17v-5"/><path d="M13 17V7"/><path d="M18 17v-3"/></svg></span>
-          <span class="mockup-row-text">Marché — Tomate : 250 FCFA/kg</span>
+          <span class="mockup-row-text">Marché – Tomate : 250 FCFA/kg</span>
           <span class="mockup-row-badge">LIVE</span>
         </div>
         <div class="mockup-row">
@@ -794,10 +922,10 @@
 
 <!-- ── LES 15 MODULES ────────────────────────────────────────────────── -->
 <section id="modules" class="section-dark padded">
-  <span class="section-tag reveal">— Les Modules</span>
-  <h2 class="section-title reveal reveal-delay-1">15 modules.<br>Une seule application.</h2>
+  <span class="section-tag reveal">– Les Modules</span>
+  <h2 class="section-title reveal reveal-delay-1">18 modules.<br>Une seule application.</h2>
   <p class="section-intro reveal reveal-delay-2">
-    Chaque module répond à un besoin précis de la chaîne agricole burkinabè —
+    Chaque module répond à un besoin précis de la chaîne agricole burkinabè –
     du sol à la vente, de la formation à la gestion.
   </p>
 
@@ -806,111 +934,149 @@
     <div class="module-card">
       <span class="module-cat cat-ag">Agronomique</span>
       <span class="module-num">01</span>
-      <span class="module-name">Analyse de Sol</span>
-      <span class="module-desc">iSDAsoil satellite Africa — pH, nutriments, type de sol</span>
+      <span class="module-name">Cartographie de Parcelle</span>
+      <span class="module-desc">Traçage au doigt, marche GPS ou coordonnées cadastrales – surface calculée automatiquement</span>
     </div>
     <div class="module-card">
       <span class="module-cat cat-ag">Agronomique</span>
       <span class="module-num">02</span>
+      <span class="module-name">Analyse de Sol</span>
+      <span class="module-desc">iSDAsoil satellite Africa, échantillonnage multi-points sur grille de 30 m – pH, azote, carbone, texture</span>
+    </div>
+    <div class="module-card">
+      <span class="module-cat cat-ag">Agronomique</span>
+      <span class="module-num">03</span>
       <span class="module-name">Diagnostic Phytosanitaire</span>
       <span class="module-desc">Identification maladies et ravageurs, recommandations traitements</span>
     </div>
     <div class="module-card">
       <span class="module-cat cat-ag">Agronomique</span>
-      <span class="module-num">03</span>
+      <span class="module-num">04</span>
       <span class="module-name">Fiches Techniques Cultures</span>
-      <span class="module-desc">Guide complet pour 16+ cultures adaptées au Sahel</span>
+      <span class="module-desc">Guide complet pour 16+ cultures adaptées au Sahel, ajusté aux résultats d'analyse du sol</span>
     </div>
     <div class="module-card">
       <span class="module-cat cat-ag">Agronomique</span>
-      <span class="module-num">04</span>
+      <span class="module-num">05</span>
+      <span class="module-name">Plan d'Arrosage</span>
+      <span class="module-desc">Doses et fréquences selon sol, culture et superficie – alerte sécheresse pour le pluvial</span>
+    </div>
+    <div class="module-card">
+      <span class="module-cat cat-ag">Agronomique</span>
+      <span class="module-num">06</span>
       <span class="module-name">Calendrier Cultural</span>
       <span class="module-desc">Planification des semis, entretien et récoltes par culture</span>
     </div>
     <!-- TECHNOLOGIE -->
     <div class="module-card">
       <span class="module-cat cat-tech">Technologie</span>
-      <span class="module-num">05</span>
+      <span class="module-num">07</span>
       <span class="module-name">Prévisions Météo</span>
       <span class="module-desc">7 jours de prévisions météorologiques localisées</span>
     </div>
     <div class="module-card">
       <span class="module-cat cat-tech">Technologie</span>
-      <span class="module-num">06</span>
+      <span class="module-num">08</span>
       <span class="module-name">IoT Capteurs</span>
       <span class="module-desc">Intégration capteurs sol et environnementaux connectés</span>
     </div>
     <div class="module-card">
       <span class="module-cat cat-tech">Technologie</span>
-      <span class="module-num">07</span>
+      <span class="module-num">09</span>
       <span class="module-name">Tableau de Bord Agriculteur</span>
       <span class="module-desc">Vue d'ensemble de l'App, météo</span>
     </div>
     <!-- COMMERCE -->
     <div class="module-card">
       <span class="module-cat cat-com">Commerce</span>
-      <span class="module-num">08</span>
+      <span class="module-num">10</span>
       <span class="module-name">Marché Numérique</span>
-      <span class="module-desc">Annonces vente/achat produits agricoles avec géolocalisation</span>
+      <span class="module-desc">Annonces vente/achat géolocalisées, mise en relation directe entre producteur et acheteur</span>
     </div>
     <div class="module-card">
       <span class="module-cat cat-com">Commerce</span>
-      <span class="module-num">09</span>
+      <span class="module-num">11</span>
       <span class="module-name">Boutiques d'Intrants</span>
       <span class="module-desc">Annuaire géolocalisé des boutiques agréées, stocks et prix</span>
     </div>
     <div class="module-card">
       <span class="module-cat cat-com">Commerce</span>
-      <span class="module-num">10</span>
+      <span class="module-num">12</span>
       <span class="module-name">Prix de Référence</span>
       <span class="module-desc">Prix moyen du marché par culture pour éviter les exploitations</span>
     </div>
     <!-- FORMATION -->
     <div class="module-card">
       <span class="module-cat cat-form">Formation</span>
-      <span class="module-num">11</span>
+      <span class="module-num">13</span>
       <span class="module-name">Portail Étudiant</span>
-      <span class="module-desc">Vente de PDFs agricoles, revenus LigdiCash — étudiants rémunérés</span>
+      <span class="module-desc">Vente de PDFs agricoles, revenus LigdiCash – étudiants rémunérés</span>
     </div>
     <div class="module-card">
       <span class="module-cat cat-form">Formation</span>
-      <span class="module-num">12</span>
+      <span class="module-num">14</span>
       <span class="module-name">Formation en Ligne</span>
       <span class="module-desc">Modules de formation pratique accessibles hors ligne et formations vidéos en 3 langues</span>
     </div>
     <!-- GESTION -->
     <div class="module-card">
       <span class="module-cat cat-gest">Gestion</span>
-      <span class="module-num">13</span>
+      <span class="module-num">15</span>
       <span class="module-name">Gestion des Ouvriers</span>
       <span class="module-desc">Trouver des ouvriers, système de quota autonomisation femmes</span>
     </div>
     <div class="module-card">
       <span class="module-cat cat-gest">Gestion</span>
-      <span class="module-num">14</span>
+      <span class="module-num">16</span>
       <span class="module-name">Gestion de Production</span>
-      <span class="module-desc">Suivi des cultures actives, intrants utilisés, rendements</span>
+      <span class="module-desc">Suivi des cultures actives, intrants utilisés, rendements – rattachés à la parcelle</span>
     </div>
     <div class="module-card">
       <span class="module-cat cat-gest">Gestion</span>
-      <span class="module-num">15</span>
+      <span class="module-num">17</span>
+      <span class="module-name">Portail ONG &amp; Partenaires</span>
+      <span class="module-desc">Suivi des bénéficiaires par programme, cartographie, rapports PDF et digest hebdomadaire</span>
+    </div>
+    <div class="module-card">
+      <span class="module-cat cat-gest">Gestion</span>
+      <span class="module-num">18</span>
       <span class="module-name">Administration</span>
       <span class="module-desc">Tableau de bord institutionnel, statistiques et rapports territoriaux, surveillance phytosanitaire nationale</span>
     </div>
   </div>
 
   <div class="modules-legend reveal">
-    <div class="legend-item"><span class="legend-dot" style="background:#6EC97C"></span>Agronomique (4)</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#6EC97C"></span>Agronomique (6)</div>
     <div class="legend-item"><span class="legend-dot" style="background:#64B5F6"></span>Technologie (3)</div>
     <div class="legend-item"><span class="legend-dot" style="background:#E8820C"></span>Commerce (3)</div>
     <div class="legend-item"><span class="legend-dot" style="background:#CE93D8"></span>Formation (2)</div>
-    <div class="legend-item"><span class="legend-dot" style="background:#80CBC4"></span>Gestion (3)</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#80CBC4"></span>Gestion (4)</div>
+  </div>
+
+  <!-- Captures d'écran de l'application -->
+  <div class="screens-row reveal">
+    <div>
+      <div class="screen-frame"><div class="photo" data-src="assets/screen-parcelle.png" data-file="assets/screen-parcelle.png"></div></div>
+      <span class="screen-label">Traçage de la parcelle</span>
+    </div>
+    <div>
+      <div class="screen-frame"><div class="photo" data-src="assets/screen-analyse.png" data-file="assets/screen-analyse.png"></div></div>
+      <span class="screen-label">Carte de chaleur du sol</span>
+    </div>
+    <div>
+      <div class="screen-frame"><div class="photo" data-src="assets/screen-fiche.png" data-file="assets/screen-fiche.png"></div></div>
+      <span class="screen-label">Fiche technique culture</span>
+    </div>
+    <div>
+      <div class="screen-frame"><div class="photo" data-src="assets/screen-marche.png" data-file="assets/screen-marche.png"></div></div>
+      <span class="screen-label">Marché numérique</span>
+    </div>
   </div>
 </section>
 
 <!-- ── LES DASHBOARDS ────────────────────────────────────────────────── -->
 <section id="dashboards" class="section-light padded">
-  <span class="section-tag dark-tag reveal">— Les Tableaux de Bord</span>
+  <span class="section-tag dark-tag reveal">– Les Tableaux de Bord</span>
   <h2 class="section-title reveal reveal-delay-1" style="color:var(--dk);">Chaque acteur a<br>sa propre vue</h2>
   <p class="section-intro on-light reveal reveal-delay-2">
     Quatre tableaux de bord distincts, conçus pour les besoins spécifiques de chaque utilisateur
@@ -923,7 +1089,7 @@
         <span class="db-icon"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#1E8449" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"/><path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"/></svg></span>
         <div>
           <div class="db-title">Dashboard Agriculteur</div>
-          <div class="db-subtitle">Vue terrain — production & marché</div>
+          <div class="db-subtitle">Vue terrain – production & marché</div>
         </div>
       </div>
       <ul class="db-features">
@@ -940,7 +1106,7 @@
         <span class="db-icon"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#1E8449" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><path d="M21.4 10.9a1 1 0 0 0 0-1.8L12.8 5.2a2 2 0 0 0-1.6 0L2.6 9.1a1 1 0 0 0 0 1.8l8.6 3.9a2 2 0 0 0 1.6 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg></span>
         <div>
           <div class="db-title">Dashboard Étudiant</div>
-          <div class="db-subtitle">Portail revenus — PDFs</div>
+          <div class="db-subtitle">Portail revenus – PDFs</div>
         </div>
       </div>
       <ul class="db-features">
@@ -991,7 +1157,7 @@
 
 <!-- ── IMPACT ────────────────────────────────────────────────────────── -->
 <section id="impact" class="section-mid padded">
-  <span class="section-tag reveal">— Impact Socio-Économique</span>
+  <span class="section-tag reveal">– Impact Socio-Économique</span>
   <h2 class="section-title reveal reveal-delay-1">Un impact concret<br>pour chaque acteur</h2>
   <p class="section-intro reveal reveal-delay-2">
     CultivaTech crée de la valeur pour l'ensemble des parties prenantes
@@ -1003,7 +1169,8 @@
       <div class="impact-icon"><svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="#1E8449" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"/><path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"/></svg></div>
       <div class="impact-title">Agriculteurs</div>
       <ul class="impact-list">
-        <li>Accès aux données sol satellite pour optimiser les intrants</li>
+        <li>Parcelle délimitée et sol analysé sans passer par un laboratoire</li>
+        <li>Doses de fumure et d'eau ajustées aux mesures réelles du champ</li>
         <li>Diagnostic phytosanitaire immédiat sans expert</li>
         <li>Prix de référence pour négocier équitablement</li>
         <li>Géolocalisation des boutiques d'intrants les plus proches</li>
@@ -1038,25 +1205,38 @@
       </ul>
       <span class="impact-badge">RÉSEAU COMMERCIAL</span>
     </div>
+    <div class="impact-card ag reveal reveal-delay-4">
+      <div class="impact-icon"><svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="#1E8449" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+      <div class="impact-title">ONG, Projets &amp; Microfinance</div>
+      <ul class="impact-list">
+        <li>Rattachement des bénéficiaires par code programme, avec consentement</li>
+        <li>Tableau de bord filtré sur leur seule cohorte</li>
+        <li>Cartographie des parcelles suivies</li>
+        <li>Rapports PDF et digest hebdomadaire automatiques</li>
+        <li>Données de rendement vérifiables pour les bailleurs</li>
+        <li>Suivi d'impact sans enquête de terrain supplémentaire</li>
+      </ul>
+      <span class="impact-badge">SUIVI D'IMPACT</span>
+    </div>
   </div>
 </section>
 
 <!-- ── INNOVATIONS ───────────────────────────────────────────────────── -->
 <section id="innovations" class="section-light padded">
-  <span class="section-tag dark-tag reveal">— Innovations Majeures</span>
+  <span class="section-tag dark-tag reveal">– Innovations Majeures</span>
   <h2 class="section-title reveal reveal-delay-1" style="color:var(--dk);">Ce qui nous distingue</h2>
 
   <div class="innovations-grid reveal reveal-delay-2">
     <div class="innov-card">
       <div class="innov-num">01</div>
-      <div class="innov-title">Analyse Sol par Satellite</div>
-      <div class="innov-desc">Intégration iSDAsoil Africa — base de données satellitaire couvrant toute l'Afrique subsaharienne. Chaque agriculteur connaît son sol sans analyse physique.</div>
-      <span class="innov-tag">iSDAsoil API v2</span>
+      <div class="innov-title">Analyse de Sol Multi-Points</div>
+      <div class="innov-desc">La parcelle est échantillonnée sur une grille de 30 m via iSDAsoil Africa, puis restituée en carte de chaleur. L'agriculteur voit les zones pauvres de son champ sans jamais avoir envoyé un échantillon au laboratoire.</div>
+      <span class="innov-tag">iSDAsoil API v2 · grille 30 m</span>
     </div>
     <div class="innov-card">
       <div class="innov-num">02</div>
       <div class="innov-title">100% Fonctionnel Hors Ligne</div>
-      <div class="innov-desc">L'intégralité des 15 modules fonctionne sans connexion internet. Données synchronisées automatiquement à la prochaine connexion disponible.</div>
+      <div class="innov-desc">L'intégralité des 18 modules fonctionne sans connexion internet. Données synchronisées automatiquement à la prochaine connexion disponible.</div>
       <span class="innov-tag">Room DB + Sync</span>
     </div>
     <div class="innov-card">
@@ -1068,7 +1248,7 @@
     <div class="innov-card">
       <div class="innov-num">04</div>
       <div class="innov-title">Système de Quota Femmes</div>
-      <div class="innov-desc">Module de gestion des ouvriers avec quota configurable pour l'autonomisation des femmes en agriculture — une innovation sociale unique en Afrique de l'Ouest.</div>
+      <div class="innov-desc">Module de gestion des ouvriers avec quota configurable pour l'autonomisation des femmes en agriculture – une innovation sociale unique en Afrique de l'Ouest.</div>
       <span class="innov-tag">Autonomisation ♀</span>
     </div>
     <div class="innov-card">
@@ -1083,6 +1263,46 @@
       <div class="innov-desc">4 tableaux de bord distincts (Agriculteur, Étudiant, Admin, Institutionnel) offrant des vues adaptées à chaque niveau de la chaîne de valeur agricole.</div>
       <span class="innov-tag">4 profils · Supabase RLS</span>
     </div>
+    <div class="innov-card">
+      <div class="innov-num">07</div>
+      <div class="innov-title">L'Analyse Pilote les Recommandations</div>
+      <div class="innov-desc">Le pH, l'azote, le carbone et la texture mesurés sur la parcelle corrigent en arrière-plan les doses de fumure organique, d'urée et de NPK, les volumes d'eau et l'estimation de rendement de chaque fiche technique.</div>
+      <span class="innov-tag">Fumure · Eau · Rendement</span>
+    </div>
+    <div class="innov-card">
+      <div class="innov-num">08</div>
+      <div class="innov-title">Parcelle Sans Cadastre</div>
+      <div class="innov-desc">Trois façons de délimiter un champ selon ce dont l'agriculteur dispose : le doigt sur l'image satellite, la marche autour du terrain avec le GPS, ou la saisie des coordonnées d'un titre foncier. Aucune ne demande de matériel.</div>
+      <span class="innov-tag">Doigt · GPS · Cadastre</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── SUR LE TERRAIN (photos) ───────────────────────────────────────── -->
+<section id="terrain" class="section-dark padded">
+  <span class="section-tag reveal">– Sur le Terrain</span>
+  <h2 class="section-title reveal reveal-delay-1">Conçu au champ,<br>pas au bureau</h2>
+  <p class="section-intro reveal reveal-delay-2">
+    CultivaTech est éprouvé sur les parcelles de la Société Agrobusiness Wend-lakonta
+    avant d'arriver entre les mains des agriculteurs.
+  </p>
+
+  <div class="terrain-grid reveal reveal-delay-2">
+    <div class="photo" data-src="assets/terrain-1.jpg" data-file="assets/terrain-1.jpg">
+      <span class="terrain-cap">Parcelle pilote<small>Gombo et maïs – 2 850 m²</small></span>
+    </div>
+    <div class="photo" data-src="assets/terrain-2.jpg" data-file="assets/terrain-2.jpg">
+      <span class="terrain-cap">Traçage GPS<small>Marche autour du champ</small></span>
+    </div>
+    <div class="photo" data-src="assets/terrain-3.jpg" data-file="assets/terrain-3.jpg">
+      <span class="terrain-cap">Formation<small>Prise en main de l'application</small></span>
+    </div>
+    <div class="photo" data-src="assets/terrain-4.jpg" data-file="assets/terrain-4.jpg">
+      <span class="terrain-cap">Récolte<small>Suivi des rendements réels</small></span>
+    </div>
+    <div class="photo" data-src="assets/terrain-5.jpg" data-file="assets/terrain-5.jpg">
+      <span class="terrain-cap">Marché<small>Vente directe producteur-acheteur</small></span>
+    </div>
   </div>
 </section>
 
@@ -1090,7 +1310,7 @@
 <section id="vision" class="section-dark padded">
   <div class="vision-split">
     <div class="vision-text">
-      <span class="section-tag reveal">— Société Agrobusiness Wend-lakonta</span>
+      <span class="section-tag reveal">– Société Agrobusiness Wend-lakonta</span>
       <h2 class="section-title reveal reveal-delay-1">Une entreprise révolutionnaire<br>au service du Burkina</h2>
       <blockquote class="vision-quote reveal reveal-delay-2">
         "Numériser l'agriculture burkinabè, c'est nourrir une nation entière avec les outils du 21ème siècle."
@@ -1102,6 +1322,12 @@
         Nous croyons que chaque agriculteur burkinabè mérite les mêmes outils que ceux
         disponibles dans les pays les plus avancés du monde.
       </p>
+      <div class="photo vision-photo reveal reveal-delay-3" data-src="assets/equipe.jpg" data-file="assets/equipe.jpg"></div>
+      <div class="proof-band reveal reveal-delay-3">
+        <span class="proof-chip">Finaliste national · Prix Pierre Castel 2026</span>
+        <span class="proof-chip ghost">+9,61 % de rendement sur la parcelle pilote</span>
+        <span class="proof-chip ghost">Chiffre d'affaires 2025 en hausse de 20,6 %</span>
+      </div>
     </div>
     <div class="vision-pillars reveal reveal-delay-2">
       <div class="vpillar">
@@ -1115,7 +1341,7 @@
         <span class="vpillar-icon"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#3ECA7A" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></svg></span>
         <div>
           <div class="vpillar-title">Développement Numérique</div>
-          <div class="vpillar-desc">CultivaTech comme moteur de la transformation numérique agricole — de la parcelle au marché.</div>
+          <div class="vpillar-desc">CultivaTech comme moteur de la transformation numérique agricole – de la parcelle au marché.</div>
         </div>
       </div>
       <div class="vpillar">
@@ -1145,12 +1371,12 @@
 
 <!-- ── DOWNLOAD ──────────────────────────────────────────────────────── -->
 <section id="download">
-  <span class="section-tag reveal" style="display:block;text-align:center;">— Téléchargement</span>
+  <span class="section-tag reveal" style="display:block;text-align:center;">– Téléchargement</span>
   <h2 class="section-title reveal reveal-delay-1">
     Rejoindre la phase pilote<br><em style="font-style:italic;color:var(--gold);">CultivaTech</em>
   </h2>
   <p class="download-sub reveal reveal-delay-2">
-    Application Android — Disponible en téléchargement direct.<br>
+    Application Android – Disponible en téléchargement direct.<br>
     Aucun abonnement requis pendant la phase pilote.
   </p>
   <div class="download-actions reveal reveal-delay-3">
@@ -1182,10 +1408,27 @@
 
 <!-- ── SCRIPTS ──────────────────────────────────────────────────────── -->
 <script>
+  // ── EMPLACEMENTS PHOTO ──────────────────────────────────────────────
+  // Chaque .photo[data-src] tente de charger son image. Si le fichier n'a pas
+  // encore été déposé dans assets/, la tuile garde son dégradé de repli et
+  // affiche le nom du fichier attendu – le site reste présentable.
+  (function () {
+    document.querySelectorAll('.photo[data-src]').forEach(function (el) {
+      const src = el.getAttribute('data-src');
+      const img = new Image();
+      img.onload = function () {
+        el.style.backgroundImage = "url('" + src + "')";
+        el.classList.add('has-image');
+      };
+      img.src = src;
+    });
+  })();
+</script>
+<script>
   // ── STAT « Agriculteurs en base » ───────────────────────────────────
   // Valeur statique : la base de 2 000+ agriculteurs issus des formations
   // et partenariats SAW-SARL (pré-inscrits pour le lancement officiel).
-  // NB : le comptage live via la clé anon n'est plus possible — la table
+  // NB : le comptage live via la clé anon n'est plus possible – la table
   // `users` est désormais protégée par RLS (sécurité). Le chiffre affiché
   // reflète la base réelle, plus pertinente pour la communication.
   (function () {
