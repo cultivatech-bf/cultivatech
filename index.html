@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CultivaTech – L'Agriculture Numérique du Burkina Faso</title>
-  <meta name="description" content="CultivaTech : 15 modules intégrés, 100% fonctionnel hors ligne. La plateforme agro-numérique dédiée aux agriculteurs du Burkina Faso." />
+  <meta name="description" content="CultivaTech : 18 modules intégrés, 100% fonctionnel hors ligne. La plateforme agro-numérique dédiée aux agriculteurs du Burkina Faso." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,700;0,800;0,900;1,700&family=Nunito+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
@@ -89,7 +89,7 @@
     #heroPhoto {
       position: absolute; inset: 0;
       background-image:
-        url('assets/hero.png'),
+        url('assets/hero.jpg'),
         url('assets/hero.png'),
         linear-gradient(135deg, #142A1C 0%, #0D0E22 55%, #1B2350 100%);
       background-size: cover;
@@ -819,7 +819,7 @@
   </div>
   <div class="stat-item">
     <span class="stat-num" id="install-count" data-count="2000">2 000+</span>
-    <span class="stat-label">Agriculteurs en base</span>
+    <span class="stat-label">Agriculteurs formés et pré-inscrits</span>
   </div>
 </div>
 
@@ -835,6 +835,12 @@
         CultivaTech est une application Android développée spécifiquement
         pour les réalités du Burkina Faso – connectivité limitée, diversité
         linguistique, et besoins agricoles variés.
+      </p>
+      <p class="section-intro on-light reveal reveal-delay-2" style="font-size:0.95rem;">
+        En phase pilote depuis décembre 2024 : <strong>116 agriculteurs
+        utilisent activement l'application</strong> et 102 productions y sont
+        suivies, au sein d'un vivier de plus de 2 000 agriculteurs formés et
+        pré-inscrits par la Société Agrobusiness Wend-lakonta.
       </p>
       <div class="app-pillars">
         <div class="pillar reveal reveal-delay-2">
@@ -1056,19 +1062,19 @@
   <!-- Captures d'écran de l'application -->
   <div class="screens-row reveal">
     <div>
-      <div class="screen-frame"><div class="photo" data-src="assets/screen-parcelle.jpg" data-file="assets/screen-parcelle.jpg"></div></div>
+      <div class="screen-frame"><div class="photo" data-src="assets/screen-parcelle.png" data-file="assets/screen-parcelle.png"></div></div>
       <span class="screen-label">Traçage de la parcelle</span>
     </div>
     <div>
-      <div class="screen-frame"><div class="photo" data-src="assets/screen-analyse.jpg" data-file="assets/screen-analyse.jpg"></div></div>
+      <div class="screen-frame"><div class="photo" data-src="assets/screen-analyse.png" data-file="assets/screen-analyse.png"></div></div>
       <span class="screen-label">Carte de chaleur du sol</span>
     </div>
     <div>
-      <div class="screen-frame"><div class="photo" data-src="assets/screen-fiche.jpg" data-file="assets/screen-fiche.jpg"></div></div>
+      <div class="screen-frame"><div class="photo" data-src="assets/screen-fiche.png" data-file="assets/screen-fiche.png"></div></div>
       <span class="screen-label">Fiche technique culture</span>
     </div>
     <div>
-      <div class="screen-frame"><div class="photo" data-src="assets/screen-marche.jpg" data-file="assets/screen-marche.jpg"></div></div>
+      <div class="screen-frame"><div class="photo" data-src="assets/screen-marche.png" data-file="assets/screen-marche.png"></div></div>
       <span class="screen-label">Marché numérique</span>
     </div>
   </div>
@@ -1254,7 +1260,7 @@
     <div class="innov-card">
       <div class="innov-num">05</div>
       <div class="innov-title">Marché avec Prix de Référence</div>
-      <div class="innov-desc">Le marché numérique calcule automatiquement le prix de référence moyen par culture et par zone, protégeant les agriculteurs contre les prix abusifs.</div>
+      <div class="innov-desc">Le marché numérique calcule le prix moyen des offres en cours pour chaque culture, et l'affiche sur l'annonce – une référence pour négocier plutôt que subir le prix proposé.</div>
       <span class="innov-tag">GPS · Prix équitable</span>
     </div>
     <div class="innov-card">
@@ -1289,7 +1295,7 @@
 
   <div class="terrain-grid reveal reveal-delay-2">
     <div class="photo" data-src="assets/terrain-1.jpg" data-file="assets/terrain-1.jpg">
-      <span class="terrain-cap">Parcelle pilote<small>Mil – 2 850 m²</small></span>
+      <span class="terrain-cap">Parcelle pilote<small>Gombo et maïs – 2 850 m²</small></span>
     </div>
     <div class="photo" data-src="assets/terrain-2.jpg" data-file="assets/terrain-2.jpg">
       <span class="terrain-cap">Traçage GPS<small>Marche autour du champ</small></span>
@@ -1425,7 +1431,7 @@
   })();
 </script>
 <script>
-  // ── STAT « Agriculteurs en base » ───────────────────────────────────
+  // ── STAT « Agriculteurs formés et pré-inscrits » ─────────────────────
   // Valeur statique : la base de 2 000+ agriculteurs issus des formations
   // et partenariats SAW-SARL (pré-inscrits pour le lancement officiel).
   // NB : le comptage live via la clé anon n'est plus possible – la table
