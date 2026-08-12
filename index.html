@@ -837,8 +837,8 @@
         linguistique, et besoins agricoles variés.
       </p>
       <p class="section-intro on-light reveal reveal-delay-2" style="font-size:0.95rem;">
-        En phase pilote depuis décembre 2024 : <strong>116 agriculteurs
-        utilisent activement l'application</strong> et 102 productions y sont
+        En phase pilote depuis décembre 2024 : <strong><span data-stat="agriculteurs">116</span> agriculteurs
+        utilisent activement l'application</strong> et <span data-stat="productions">102</span> productions y sont
         suivies, au sein d'un vivier de plus de 2 000 agriculteurs formés et
         pré-inscrits par la Société Agrobusiness Wend-lakonta.
       </p>
@@ -1453,6 +1453,37 @@
       el.textContent = current.toLocaleString('fr-FR') + '+';
       if (current >= target) clearInterval(timer);
     }, 35);
+  })();
+
+  // ── COMPTEURS LIVE DEPUIS LA BASE ───────────────────────────────────
+  // Les chiffres d'usage sont lus sur le serveur plutôt qu'écrits en dur :
+  // un chiffre recopié à la main vieillit en silence et finit par
+  // contredire le deck. La fonction `stats-publiques` ne renvoie que des
+  // agrégats — la table `users` reste fermée à la clé publique.
+  //
+  // Les valeurs du HTML servent de repli. Si le réseau ou la fonction
+  // manque, le visiteur voit le dernier chiffre connu, jamais un tiret :
+  // un site qui affiche « — » devant un partenaire coûte plus cher qu'un
+  // chiffre d'avant-hier.
+  (function () {
+    const cibles = document.querySelectorAll('[data-stat]');
+    if (!cibles.length) return;
+
+    fetch('https://vyqhzagajlbosikzfnit.supabase.co/functions/v1/stats-publiques',
+          { cache: 'no-store' })
+      .then(r => r.ok ? r.json() : Promise.reject(r.status))
+      .then(stats => {
+        cibles.forEach(el => {
+          const v = stats[el.dataset.stat];
+          // On n'écrase le repli que si la valeur est exploitable. Un zéro
+          // renvoyé par une requête en échec ne doit pas effacer un vrai
+          // chiffre.
+          if (typeof v === 'number' && v > 0) {
+            el.textContent = v.toLocaleString('fr-FR');
+          }
+        });
+      })
+      .catch(() => { /* le repli du HTML reste affiché */ });
   })();
 
   // ── CANVAS HERO ANIMATION (particules / champ agricole) ────────────
