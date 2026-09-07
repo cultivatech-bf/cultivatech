@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CultivaTech - L'Agriculture Numérique du Burkina Faso</title>
-  <meta name="description" content="CultivaTech : 18 modules intégrés, 100% fonctionnel hors ligne. La plateforme agro-numérique dédiée aux agriculteurs du Burkina Faso." />
+  <meta name="description" content="CultivaTech : 18 modules intégrés, utilisables au champ sans réseau. La plateforme agro-numérique dédiée aux agriculteurs du Burkina Faso." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,700;0,800;0,900;1,700&family=Nunito+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
@@ -618,6 +618,15 @@
       font-size: 0.72rem; color: rgba(255,255,255,0.3);
       font-family: var(--font-body); letter-spacing: 0.04em; font-weight: 600;
     }
+    /* Adresse de contact institutionnelle. Elle est volontairement plus visible
+       que la tagline : un ministère ou un laboratoire n'écrit pas sur WhatsApp. */
+    .footer-contact {
+      font-size: 0.78rem; color: rgba(255,255,255,0.55);
+      font-family: var(--font-body); font-weight: 600;
+      margin-top: 0.5rem;
+    }
+    .footer-contact a { color: var(--gold); }
+    .footer-contact a:hover { text-decoration: underline; }
     .footer-links { display: flex; gap: 2rem; }
     .footer-links a {
       font-size: 0.78rem; color: rgba(255,255,255,0.4);
@@ -785,11 +794,11 @@
   <div id="heroPhoto"></div>
   <canvas id="heroCanvas"></canvas>
   <div class="hero-content">
-    <span class="hero-tag">Burkina Faso · Plateforme Agro-Numérique · Phase Pilote 2026</span>
+    <span class="hero-tag">Burkina Faso · Plateforme Agro-Numérique · Phase pilote depuis 2024</span>
     <h1>L'Agriculture<br><em>Numérique</em><br>du Burkina Faso</h1>
     <p class="hero-sub">
       De la parcelle cartographiée au marché, de l'analyse de sol à la formation -
-      18 modules intégrés, 100% fonctionnels hors ligne, pour l'ensemble
+      18 modules intégrés, utilisables au champ sans réseau, pour l'ensemble
       de la chaîne agricole burkinabè.
     </p>
     <div class="hero-actions">
@@ -811,15 +820,15 @@
   </div>
   <div class="stat-item">
     <span class="stat-num">100%</span>
-    <span class="stat-label">Fonctionnel hors ligne</span>
+    <span class="stat-label">Des travaux du champ sans réseau</span>
   </div>
   <div class="stat-item">
     <span class="stat-num" data-count="4">4</span>
     <span class="stat-label">Tableaux de bord</span>
   </div>
   <div class="stat-item">
-    <span class="stat-num" id="install-count" data-count="2000">2 000+</span>
-    <span class="stat-label">Agriculteurs formés et pré-inscrits</span>
+    <span class="stat-num" id="install-count" data-count="1700">1 700+</span>
+    <span class="stat-label">Utilisateurs de l'application</span>
   </div>
 </div>
 
@@ -837,17 +846,16 @@
         linguistique, et besoins agricoles variés.
       </p>
       <p class="section-intro on-light reveal reveal-delay-2" style="font-size:0.95rem;">
-        En phase pilote depuis décembre 2024 : <strong><span data-stat="agriculteurs">116</span> agriculteurs
-        utilisent activement l'application</strong> et <span data-stat="productions">102</span> productions y sont
-        suivies, au sein d'un vivier de plus de 2 000 agriculteurs formés et
-        pré-inscrits par la Société Agrobusiness Wend-lakonta.
+        En phase pilote depuis décembre 2024 : <strong><span data-stat="agriculteurs">114</span> testeurs
+        sont suivis de près</strong> et <span data-stat="productions">102</span> productions y sont
+        documentées, au sein de plus de 1 700 utilisateurs de l'application.
       </p>
       <div class="app-pillars">
         <div class="pillar reveal reveal-delay-2">
           <span class="pillar-icon"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#1E8449" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><path d="M13 7 9 3 5 7l4 4"/><path d="m17 11 4 4-4 4-4-4"/><path d="m8 12 4 4"/><path d="m16 8 3-3"/><path d="M9 21a6 6 0 0 0-6-6"/></svg></span>
           <div>
-            <div class="pillar-title">Parcelle cartographiée, sol analysé</div>
-            <div class="pillar-desc">L'agriculteur trace sa parcelle au doigt, en marchant avec le GPS ou en saisissant ses coordonnées cadastrales. Le sol est ensuite analysé sur une grille de 30 m - pH, azote, carbone, texture - et non plus en un seul point.</div>
+            <div class="pillar-title">Parcelle cartographiée, sol estimé</div>
+            <div class="pillar-desc">L'agriculteur trace sa parcelle au doigt, en marchant avec le GPS ou en saisissant ses coordonnées cadastrales. Le sol est ensuite estimé sur une grille de 30 m - pH, azote, carbone, texture - et non plus en un seul point.</div>
           </div>
         </div>
         <div class="pillar reveal reveal-delay-3">
@@ -860,8 +868,8 @@
         <div class="pillar reveal reveal-delay-4">
           <span class="pillar-icon"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#1E8449" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><path d="M12 22v-5"/><path d="M9 8V2"/><path d="M15 8V2"/><path d="M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8z"/></svg></span>
           <div>
-            <div class="pillar-title">100% hors ligne - sync automatique</div>
-            <div class="pillar-desc">Toutes les fonctionnalités accessibles sans connexion. Les données se synchronisent dès que le réseau revient.</div>
+            <div class="pillar-title">Le champ sans réseau, la synchronisation ensuite</div>
+            <div class="pillar-desc">Parcelle, fiches techniques, arrosage, diagnostic et suivi de production se font sans connexion. Les données remontent dès que le réseau revient.</div>
           </div>
         </div>
         <div class="pillar reveal reveal-delay-4">
@@ -926,7 +934,7 @@
   </div>
 </section>
 
-<!-- ── LES 15 MODULES ────────────────────────────────────────────────── -->
+<!-- ── LES 18 MODULES ────────────────────────────────────────────────── -->
 <section id="modules" class="section-dark padded">
   <span class="section-tag reveal">- Les Modules</span>
   <h2 class="section-title reveal reveal-delay-1">18 modules.<br>Une seule application.</h2>
@@ -947,7 +955,7 @@
       <span class="module-cat cat-ag">Agronomique</span>
       <span class="module-num">02</span>
       <span class="module-name">Analyse de Sol</span>
-      <span class="module-desc">iSDAsoil satellite Africa, échantillonnage multi-points sur grille de 30 m - pH, azote, carbone, texture</span>
+      <span class="module-desc">Estimation iSDAsoil satellite Africa, multi-points sur grille de 30 m - pH, azote, carbone, texture</span>
     </div>
     <div class="module-card">
       <span class="module-cat cat-ag">Agronomique</span>
@@ -1003,7 +1011,7 @@
       <span class="module-cat cat-com">Commerce</span>
       <span class="module-num">11</span>
       <span class="module-name">Boutiques d'Intrants</span>
-      <span class="module-desc">Annuaire géolocalisé des boutiques agréées, stocks et prix</span>
+      <span class="module-desc">Annuaire géolocalisé des boutiques agréées, catalogue par catégorie et contact direct</span>
     </div>
     <div class="module-card">
       <span class="module-cat cat-com">Commerce</span>
@@ -1101,7 +1109,7 @@
       <ul class="db-features">
         <li>Cultures actives et stades de croissance</li>
         <li>Alertes météo et recommandations culturales</li>
-        <li>Prix du marché en temps réel</li>
+        <li>Prix de référence calculé sur les annonces en cours</li>
         <li>Analyse de la structure du sol automatique</li>
         <li>Gestion des ouvriers et quota femmes</li>
         <li>Diagnostic des cultures</li>
@@ -1175,13 +1183,13 @@
       <div class="impact-icon"><svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="#1E8449" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"/><path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"/></svg></div>
       <div class="impact-title">Agriculteurs</div>
       <ul class="impact-list">
-        <li>Parcelle délimitée et sol analysé sans passer par un laboratoire</li>
-        <li>Doses de fumure et d'eau ajustées aux mesures réelles du champ</li>
+        <li>Parcelle délimitée et sol estimé avant tout prélèvement</li>
+        <li>Doses de fumure et d'eau ajustées aux caractéristiques du champ</li>
         <li>Diagnostic phytosanitaire immédiat sans expert</li>
         <li>Prix de référence pour négocier équitablement</li>
         <li>Géolocalisation des boutiques d'intrants les plus proches</li>
         <li>Gestion des ouvriers avec système de quota pour les femmes</li>
-        <li>Toutes fonctionnalités principales accessibles sans internet</li>
+        <li>Les travaux du champ accessibles sans internet</li>
       </ul>
       <span class="impact-badge">IMPACT TERRAIN</span>
     </div>
@@ -1204,8 +1212,8 @@
       <ul class="impact-list">
         <li>Visibilité numérique sur l'ensemble du territoire</li>
         <li>Géolocalisation pour attirer les agriculteurs à proximité</li>
-        <li>Mise en avant des stocks et prix en temps réel</li>
-        <li>Canal de commande direct depuis l'app</li>
+        <li>Mise en avant du catalogue par catégorie de produits</li>
+        <li>Appel ou WhatsApp en un geste depuis la fiche boutique</li>
         <li>Accès à une clientèle élargie au-delà du périmètre local</li>
         <li>Intégration dans l'écosystème CultivaTech</li>
       </ul>
@@ -1236,25 +1244,25 @@
     <div class="innov-card">
       <div class="innov-num">01</div>
       <div class="innov-title">Analyse de Sol Multi-Points</div>
-      <div class="innov-desc">La parcelle est échantillonnée sur une grille de 30 m via iSDAsoil Africa, puis restituée en carte de chaleur. L'agriculteur voit les zones pauvres de son champ sans jamais avoir envoyé un échantillon au laboratoire.</div>
-      <span class="innov-tag">iSDAsoil API v2 · grille 30 m</span>
+      <div class="innov-desc">La parcelle est échantillonnée sur une grille de 30 m via iSDAsoil Africa, puis restituée en carte de chaleur. L'agriculteur voit quelles zones de son champ sont les plus pauvres, et sait où prélever le jour où une analyse de laboratoire est nécessaire.</div>
+      <span class="innov-tag">iSDAsoil API v2 · estimation · grille 30 m</span>
     </div>
     <div class="innov-card">
       <div class="innov-num">02</div>
-      <div class="innov-title">100% Fonctionnel Hors Ligne</div>
-      <div class="innov-desc">L'intégralité des 18 modules fonctionne sans connexion internet. Données synchronisées automatiquement à la prochaine connexion disponible.</div>
+      <div class="innov-title">Conçu pour les zones sans réseau</div>
+      <div class="innov-desc">Parcelle, fiches techniques, arrosage, diagnostic et suivi de production fonctionnent sans connexion internet. Le marché, la météo et l'analyse de sol se synchronisent dès que le réseau revient.</div>
       <span class="innov-tag">Room DB + Sync</span>
     </div>
     <div class="innov-card">
       <div class="innov-num">03</div>
       <div class="innov-title">Portail Étudiant Rémunéré</div>
-      <div class="innov-desc">Premier système qui rémunère les étudiants burkinabè pour partager leurs connaissances agricoles. Paiements automatiques via LigdiCash.</div>
+      <div class="innov-desc">Un système qui rémunère les étudiants burkinabè pour partager leurs connaissances agricoles. Paiements automatiques via LigdiCash.</div>
       <span class="innov-tag">LigdiCash · PDF Market</span>
     </div>
     <div class="innov-card">
       <div class="innov-num">04</div>
       <div class="innov-title">Système de Quota Femmes</div>
-      <div class="innov-desc">Module de gestion des ouvriers avec quota configurable pour l'autonomisation des femmes en agriculture - une innovation sociale unique en Afrique de l'Ouest.</div>
+      <div class="innov-desc">Module de gestion des ouvriers avec quota configurable pour l'autonomisation des femmes en agriculture - un levier social rarement outillé dans les applications agricoles.</div>
       <span class="innov-tag">Autonomisation ♀</span>
     </div>
     <div class="innov-card">
@@ -1272,7 +1280,7 @@
     <div class="innov-card">
       <div class="innov-num">07</div>
       <div class="innov-title">L'Analyse Pilote les Recommandations</div>
-      <div class="innov-desc">Le pH, l'azote, le carbone et la texture mesurés sur la parcelle corrigent en arrière-plan les doses de fumure organique, d'urée et de NPK, les volumes d'eau et l'estimation de rendement de chaque fiche technique.</div>
+      <div class="innov-desc">Le pH, l'azote, le carbone et la texture estimés sur la parcelle corrigent en arrière-plan les doses de fumure organique, d'urée et de NPK, les volumes d'eau et l'estimation de rendement de chaque fiche technique.</div>
       <span class="innov-tag">Fumure · Eau · Rendement</span>
     </div>
     <div class="innov-card">
@@ -1408,6 +1416,9 @@
   <div>
     <div class="footer-logo">Cultiva<span>Tech</span></div>
     <div class="footer-tagline" style="margin-top:0.4rem;">Société Agrobusiness Wend-lakonta · Burkina Faso · 2026</div>
+    <div class="footer-contact">
+      <a href="mailto:contact@cultivatech.africa">contact@cultivatech.africa</a>
+    </div>
   </div>
   <div class="footer-links">
     <a href="#app">Application</a>
@@ -1436,16 +1447,16 @@
   })();
 </script>
 <script>
-  // ── STAT « Agriculteurs formés et pré-inscrits » ─────────────────────
-  // Valeur statique : la base de 2 000+ agriculteurs issus des formations
-  // et partenariats SAW-SARL (pré-inscrits pour le lancement officiel).
+  // ── STAT « Utilisateurs de l'application » ───────────────────────────
+  // Valeur statique : la base d'utilisateurs de l'application issue des
+  // formations et partenariats SAW-SARL.
   // NB : le comptage live via la clé anon n'est plus possible - la table
   // `users` est désormais protégée par RLS (sécurité). Le chiffre affiché
   // reflète la base réelle, plus pertinente pour la communication.
   (function () {
     const el = document.getElementById('install-count');
     if (!el) return;
-    const target = 2000;
+    const target = 1700;
     let current = 0;
     const step = Math.max(1, Math.floor(target / 40));
     const timer = setInterval(() => {
