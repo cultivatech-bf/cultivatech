@@ -20,11 +20,18 @@
   //  casserait les chemins des images. C'est `.assetsignore`, à côté de ce
   //  fichier, qui écarte ce qui ne doit pas sortir.
   //
-  //  `workers_dev` reste vrai le temps de la mise en place - c'est l'adresse
-  //  d'aperçu qui permet de vérifier le site avant d'y brancher le domaine.
-  //  Une fois `cultivatech.africa` en service, le passer à `false` : deux
-  //  adresses servant le même contenu, c'est du contenu dupliqué pour les
-  //  moteurs de recherche, et une porte de plus à surveiller.
+  //  `workers_dev` est passé à `false` le 7 septembre 2026, une fois
+  //  `cultivatech.africa` et `www` rattachés au Worker et vérifiés. L'adresse
+  //  d'aperçu `cultivatech.ahmaddev95.workers.dev` a servi à contrôler le
+  //  déploiement avant que le domaine ne réponde ; elle n'a plus lieu d'être.
+  //
+  //  Deux adresses servant le même contenu, c'est du contenu dupliqué pour
+  //  les moteurs de recherche, un lien portant un pseudo de développeur qui
+  //  traîne, et surtout une porte que les règles de sécurité posées sur la
+  //  zone `cultivatech.africa` ne protègent pas.
+  //
+  //  Le remettre à `true` uniquement pour déboguer un déploiement, et le
+  //  rebaisser aussitôt après.
   // ═══════════════════════════════════════════════════════════════════════
 
   "$schema": "node_modules/wrangler/config-schema.json",
@@ -35,7 +42,7 @@
     "directory": "."
   },
 
-  "workers_dev": true,
+  "workers_dev": false,
   "preview_urls": false,
 
   "observability": {
